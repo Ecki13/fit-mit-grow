@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1f4934">
 <title>Fit mit Grow</title>
-<link rel="manifest" href="manifest.webmanifest">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/icon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>
 :root{--forest:#1f4934;--leaf:#477853;--mint:#dcebdc;--bg:#f4f6ef;--surface:#fffefa;--text:#203127;--muted:#758176;--line:#e4e9df;--gold:#d5a84f;--shadow:0 8px 24px #263c2b0c}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
@@ -87,5 +91,5 @@ function createChallenge(){let title=$('challengeTitle').value.trim();if(!title)
 function exportBackup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fit-mit-grow-backup.json';a.click()}
 function importBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db={...blank,...JSON.parse(r.result)};save();toast('Backup importiert')}catch{toast('Backup konnte nicht gelesen werden')}};r.readAsText(f)}
 function resetAll(){if(confirm('Alle Fit mit Grow Daten auf diesem Gerät löschen?')){db=structuredClone(blank);save();toast('Daten gelöscht')}}
-render();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+render();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=2').catch(()=>{}));
 </script></body></html>
