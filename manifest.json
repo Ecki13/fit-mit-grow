@@ -1,0 +1,17 @@
+{
+  "name": "Fit mit Grow",
+  "short_name": "Fit mit Grow",
+  "description": "Fitness und Garten wachsen gemeinsam",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6ef",
+  "theme_color": "#1f4934",
+  "id": "fit-mit-grow",
+  "dir": "auto",
+  "scope": "./",
+  "lang": "de",
+  "orientation": "portrait",
+  "categories": [
+    "health &amp; fitness"
+  ]
+}
