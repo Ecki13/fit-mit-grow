@@ -1,13 +1,14 @@
-FIT MIT GROW – PROTOTYP
-1) ZIP entpacken.
-2) index.html im Browser öffnen, um am PC zu testen.
-3) Für Installation auf Smartphone: die Dateien auf HTTPS hosten (z.B. GitHub Pages/Netlify). Seite auf dem Handy öffnen und im Browser-Menü „Installieren“ / „Zum Startbildschirm hinzufügen“ wählen.
+FIT MIT GROW – PWA FIX v3
 
-Wichtige Funktionen:
-- Liegestütze/Klimmzüge als Wiederholungszahl ohne Zeitfeld
-- Wochenstatistik mit Gesamtwiederholungen der letzten 7 Tage, Tagesbalken und Sportarten
-- Monats- und Gesamtübersicht
-- Aktivitäten, Grow-Punkte, Pflanzen-Freischaltungen, Gruppen und Challenges
-- lokale Speicherung und JSON-Backup/Import
+Diese ZIP enthält die Dateien für den GitHub-Pages-Root.
 
-Daten liegen derzeit nur auf dem Gerät/im Browser. Gruppen sind lokal; für echte Online-Freunde, synchronisierte Gärten, automatisch gewertete Challenges und Belohnungen ist ein Backend/Auth erforderlich.
+UPLOAD:
+1. ZIP entpacken.
+2. Alle enthaltenen Dateien/Ordner in den ROOT des GitHub-Repositories fit-mit-grow hochladen.
+3. Vorhandene Dateien überschreiben: index.html, manifest.webmanifest, sw.js und icons/
+4. Eine eventuell zusätzlich vorhandene manifest.json löschen (die App verwendet manifest.webmanifest).
+5. Commit changes. Danach 2–5 Minuten warten.
+
+Enthalten: index.html, manifest.webmanifest, sw.js, icons/icon-192.png, icons/icon-512.png, icons/icon-512-maskable.png
+
+Service Worker v3: fehlende Icons blockieren nicht mehr die Installation; Navigationsseiten werden network-first geladen.

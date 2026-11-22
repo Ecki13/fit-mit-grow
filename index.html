@@ -91,5 +91,5 @@ function createChallenge(){let title=$('challengeTitle').value.trim();if(!title)
 function exportBackup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fit-mit-grow-backup.json';a.click()}
 function importBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db={...blank,...JSON.parse(r.result)};save();toast('Backup importiert')}catch{toast('Backup konnte nicht gelesen werden')}};r.readAsText(f)}
 function resetAll(){if(confirm('Alle Fit mit Grow Daten auf diesem Gerät löschen?')){db=structuredClone(blank);save();toast('Daten gelöscht')}}
-render();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=2').catch(()=>{}));
+render();if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=3').catch(()=>{}));
 </script></body></html>
