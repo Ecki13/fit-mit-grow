@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1f4934">
 <title>Fit mit Grow</title>
+<meta name="fit-grow-version" content="6.0-shared-gardens-plant-catalog">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-512.png">
@@ -63,6 +64,66 @@ select[multiple]{min-height:110px}.friendChooser{display:grid;gap:7px;padding:9p
 .reward-select img{width:38px;height:38px;object-fit:cover;border-radius:8px}
 @media(min-width:600px){.plants{grid-template-columns:repeat(3,minmax(0,1fr))}.plantVisual{height:170px}}
 
+
+/* V4 – natürlicher Garten, klare Fotodarstellung und sichtbares Pflanzenwachstum */
+.hero{background:#b6d7c1 url('./plants/garden-backdrop.webp') center 55%/cover no-repeat;color:#fff}
+.hero:before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,42,25,.15),rgba(12,42,25,.04) 48%,rgba(23,48,28,.42));border-radius:inherit;height:auto;bottom:0;left:0;right:0}
+.heroText{z-index:3}
+.gardenScene{height:170px;gap:5px;padding:0 8px 7px;align-items:flex-end;justify-content:space-evenly;background:linear-gradient(0deg,rgba(38,45,25,.36),transparent 58%)}
+.gardenScene:before{height:34px;bottom:-10px;left:-2%;right:-2%;background:linear-gradient(180deg,#76573a,#4d3a29);border-radius:55% 55% 0 0;opacity:.92}
+.gardenPlantItem{position:relative;z-index:2;min-width:0;flex:1;max-width:118px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:3px}
+.gardenPlantImg{height:var(--plant-height,88px);width:100%;max-width:112px;object-fit:contain;object-position:center bottom;mix-blend-mode:normal;filter:drop-shadow(0 4px 4px #17241766);transition:height .4s ease}
+.gardenPlantImg.photo{border-radius:9px;object-fit:cover;max-height:94px;width:76px;box-shadow:0 3px 7px #17241740}
+.gardenPlantTag{width:100%;max-width:112px;padding:4px 5px;background:rgba(18,43,26,.82);border:1px solid #ffffff40;color:white;border-radius:9px;text-align:center;font-size:9px;line-height:1.15;backdrop-filter:blur(4px)}
+.gardenPlantTag b{display:block;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gardenPlantTag span{opacity:.9}
+.gardenMiniBar{height:4px;background:#ffffff46;border-radius:5px;overflow:hidden;margin-top:3px}
+.gardenMiniBar i{display:block;height:100%;border-radius:5px;background:#a8d889}
+.plantVisual{height:158px;background:linear-gradient(180deg,#edf3e9,#e6eddf);padding:7px}
+.plantVisual img{width:100%;height:100%;object-fit:contain;display:block;mix-blend-mode:normal;filter:drop-shadow(0 3px 4px #1e38251c)}
+.plantVisual img.photo{object-fit:cover;border-radius:10px;padding:0}
+.plantCopy{padding:11px 12px 13px}
+.plantGrowth{margin-top:8px;padding-top:8px;border-top:1px solid #e9eee5}
+.plantGrowthHead{display:flex;justify-content:space-between;gap:6px;font-size:10px;color:#45674b;font-weight:750}
+.plantGrowthBar{height:7px;background:#e7eee3;border-radius:8px;overflow:hidden;margin-top:5px}
+.plantGrowthBar i{display:block;height:100%;background:linear-gradient(90deg,#7db66e,#2e7544);border-radius:8px}
+.plantStages{display:grid;grid-template-columns:repeat(5,1fr);gap:2px;margin-top:6px}
+.plantStages span{height:4px;border-radius:4px;background:#e3eadf}
+.plantStages span.done{background:#7eac70}
+.plantFilters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.plantFilters button{padding:7px 10px;font-size:11px;background:#eef4eb;color:#345b3d;border:1px solid #dfe9db}
+.plantFilters button.active{background:#244f36;color:#fff;border-color:#244f36}
+.plantSearch{margin:8px 0 12px}
+.plantSearch input{background:#fbfcf8}
+.plantMeta{display:flex;flex-wrap:wrap;gap:5px}
+.plantMeta .badge{margin-top:3px}
+.gardenProgressIntro{margin:8px 0 12px;padding:10px 12px;border-radius:13px;background:#f0f5eb;color:#365c3e;font-size:12px;line-height:1.4}
+.gardenProgressIntro strong{color:#204b31}
+@media(min-width:600px){.plants{grid-template-columns:repeat(3,minmax(0,1fr))}.plantVisual{height:174px}}
+@media(max-width:420px){.gardenScene{gap:2px;padding-left:4px;padding-right:4px}.gardenPlantTag{font-size:8px;padding:3px 2px}.gardenPlantTag b{font-size:9px}.gardenPlantImg{max-width:78px}}
+
+
+/* V6 – gemeinsame, gemeinsam wachsende Gruppengärten */
+.sharedGarden{margin:14px 0 16px;padding:12px;border:1px solid #dfe8db;border-radius:16px;background:linear-gradient(180deg,#f8fbf4,#edf4e8)}
+.sharedGardenHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:9px}
+.sharedGardenHead strong{font-size:14px;color:var(--forest)}
+.sharedGardenStats{font-size:11px;color:var(--muted);text-align:right}
+.sharedGardenScene{position:relative;min-height:154px;border-radius:13px;overflow:hidden;padding:14px 10px 9px;background:linear-gradient(180deg,rgba(24,55,34,.06),rgba(25,52,29,.42)),url('./plants/garden-backdrop.webp') center 57%/cover no-repeat}
+.sharedGardenScene:before{content:'';position:absolute;left:-5%;right:-5%;bottom:-22px;height:70px;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#92734c,#513b2c);box-shadow:0 -7px 14px #243b2526}
+.sharedGardenPlants{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:end}
+.sharedGardenPlant{min-width:0;text-align:center;background:#ffffffd9;border:1px solid #ffffffaa;border-radius:11px;padding:6px 5px 7px;box-shadow:0 4px 10px #203b2518}
+.sharedGardenPlant img{width:100%;height:76px;display:block;object-fit:cover;border-radius:7px}
+.sharedGardenPlant b{display:block;font-size:10px;margin-top:5px;color:#244b31;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sharedGardenPlant small{display:block;font-size:9px;color:#5d715e}
+.sharedGardenBar{height:5px;background:#e2eadf;border-radius:5px;overflow:hidden;margin-top:5px}
+.sharedGardenBar i{display:block;height:100%;background:linear-gradient(90deg,#95c77b,#2e7544);border-radius:5px}
+.sharedGardenFooter{display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+.sharedGardenFooter select{flex:1;min-width:180px;padding:9px;font-size:12px}
+.sharedGardenFooter button{padding:9px 12px;font-size:12px}
+.sharedGardenNote{font-size:11px;color:#627564;margin-top:7px;line-height:1.4}
+@media(min-width:600px){.sharedGardenPlants{grid-template-columns:repeat(4,minmax(0,1fr))}.sharedGardenPlant img{height:88px}}
+@media(max-width:380px){.sharedGardenPlants{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style>
 </head>
 <body>
@@ -85,7 +146,7 @@ select[multiple]{min-height:110px}.friendChooser{display:grid;gap:7px;padding:9p
 <div id="distanceField"><label>Distanz (km, optional)</label><input id="distance" type="number" min="0" step="0.1" placeholder="z. B. 8,5"></div>
 <label>Datum</label><input id="activityDate" type="date" required>
 <label>Notiz (optional)</label><textarea id="note" rows="2" placeholder="z. B. Oberkörpertraining oder entspannte Waldrunde"></textarea>
-<label>Sichtbarkeit</label><select id="activityVisibility"><option value="friends">Für Freunde sichtbar</option><option value="private">Nur ich</option></select>
+<label>Sichtbarkeit</label><select id="activityVisibility"><option value="friends">Für Freunde und Gruppen sichtbar</option><option value="private">Nur ich</option></select><p class="formHint">Du trägst jede Aktivität nur einmal ein. Freigegebene Einträge erscheinen automatisch im Aktivitäten-Feed deiner Freunde und Gruppen – sie werden nicht kopiert oder erneut eingetragen.</p>
 <button style="width:100%;margin-top:12px">Speichern 🌿</button>
 </form>
 </div>
@@ -100,9 +161,18 @@ select[multiple]{min-height:110px}.friendChooser{display:grid;gap:7px;padding:9p
 </section>
 <section class="page" id="garden">
 <div class="card"><h2>🌿 Dein Garten</h2><div class="hero"><div class="heroText">Deine Bewegung lässt einen lebendigen Garten wachsen</div><div class="gardenScene" id="gardenPlants"></div></div><p class="muted">Sammle botanisch dargestellte Pflanzen. Gewöhnliche Arten schaltest du durch Aktivität frei, seltene Arten kannst du in Freundes-Challenges gewinnen.</p><div id="collection" class="plants"></div></div>
-<div class="card"><h2>Pflanzenlexikon</h2><p class="muted">Von heimischen Gartenpflanzen bis zu exotischen Blattpflanzen und Bäumen.</p><div id="plantLibrary" class="plants"></div></div>
+<div class="card"><h2>Pflanzenbibliothek · 36 Arten</h2><p class="muted">Botanische Sammlung mit 36 Arten aus Blumen, Kräutern, Gräsern, Sträuchern, Obst, Gemüse, Bäumen und Exoten. Gemeinsame Gruppen-Gärten wachsen durch freigegebene Aktivitäten aller Mitglieder.</p><div class="plantSearch"><input id="plantSearch" type="search" placeholder="Pflanze suchen …"></div><div id="plantFilters" class="plantFilters"></div><div id="plantLibrary" class="plants"></div></div>
 </section>
-<section class="page" id="groups"><div class="card"><h2>🔐 Konto & Freunde (Online)</h2><p class="muted">Registriere dich oder melde dich an. Deine Aktivitäten werden mit deinem Konto synchronisiert; Freunde sehen nur Inhalte, die du für Freunde freigegeben hast.</p><div id="authForm"><label>E-Mail</label><input id="authEmail" type="email" autocomplete="email" placeholder="deine@email.de"><label>Passwort</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Passwort"><div class="actions"><button id="btnSignup">Registrieren</button><button class="alt" id="btnLogin">Anmelden</button></div></div><div id="accountLoggedIn" style="display:none"><p>Angemeldet als <b id="accountEmail"></b></p><label>Benutzername (einzigartig, 3+ Zeichen)</label><input id="profileUsername" placeholder="z. B. ecki13"><label>Anzeigename</label><input id="profileDisplayName" placeholder="Wie Freunde dich sehen"><button id="btnSaveProfile" style="margin-top:10px">Profil speichern</button><button class="light" id="btnLogout" style="margin-top:10px">Abmelden</button></div><p id="accountStatus" class="muted" role="status"></p></div><div class="card" id="adminPanel" style="display:none"><h2>🛡️ Admin-Bereich</h2><p class="muted">Du bist als Administrator angemeldet. Hier siehst du alle registrierten Benutzerprofile. Private Aktivitäten und Gärten bleiben geschützt.</p><div id="adminUserList"></div></div><div class="card" id="friendArea" style="display:none"><h2>🤝 Freunde hinzufügen</h2><p class="muted">Freunde müssen zuerst ein Konto erstellen und einen Benutzernamen speichern.</p><label>Benutzername des Freundes</label><input id="friendUsername" placeholder="z. B. alex123"><button id="btnAddFriend" style="margin-top:10px">Freundschaftsanfrage senden</button><h3>Neue Anfragen</h3><div id="incomingRequests"></div><h3>Gesendete Anfragen</h3><div id="outgoingRequests"></div><h3>Deine Freunde</h3><div id="friendsList"></div><h3>Aktivitäten deiner Freunde</h3><div id="friendActivityFeed"></div></div><div class="card"><h2>👥 Gruppen & gemeinsame Gärten</h2><p class="muted">In dieser Version kannst du Gruppen lokal organisieren. Online-Einladungen und gemeinsame Synchronisierung werden später mit einem Backend ergänzt.</p><label>Gruppenname</label><input id="groupName" placeholder="z. B. Wandercrew"><label>Mitglieder (durch Komma trennen)</label><input id="groupMembers" placeholder="Du, Alex, Sam"><button onclick="createGroup()" style="margin-top:10px">Gruppe erstellen</button><div id="groupsList"></div></div></section>
+<section class="page" id="groups"><div class="card"><h2>🔐 Konto & Freunde (Online)</h2><p class="muted">Registriere dich oder melde dich an. Deine Aktivitäten werden einmal mit deinem Konto synchronisiert. Freunde und gemeinsame Gruppen sehen freigegebene Einträge im jeweiligen Feed.</p><div id="authForm"><label>E-Mail</label><input id="authEmail" type="email" autocomplete="email" placeholder="deine@email.de"><label>Passwort</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Passwort"><div class="actions"><button id="btnSignup">Registrieren</button><button class="alt" id="btnLogin">Anmelden</button></div></div><div id="accountLoggedIn" style="display:none"><p>Angemeldet als <b id="accountEmail"></b></p><label>Benutzername (einzigartig, 3+ Zeichen)</label><input id="profileUsername" placeholder="z. B. ecki13"><label>Anzeigename</label><input id="profileDisplayName" placeholder="Wie Freunde dich sehen"><button id="btnSaveProfile" style="margin-top:10px">Profil speichern</button><button class="light" id="btnLogout" style="margin-top:10px">Abmelden</button></div><p id="accountStatus" class="muted" role="status"></p></div><div class="card" id="adminPanel" style="display:none"><h2>🛡️ Admin-Bereich</h2><p class="muted">Du bist als Administrator angemeldet. Hier siehst du alle registrierten Benutzerprofile. Private Aktivitäten und Gärten bleiben geschützt.</p><div id="adminUserList"></div></div><div class="card" id="friendArea" style="display:none"><h2>🤝 Freunde hinzufügen</h2><p class="muted">Freunde müssen zuerst ein Konto erstellen und einen Benutzernamen speichern.</p><label>Benutzername des Freundes</label><input id="friendUsername" placeholder="z. B. alex123"><button id="btnAddFriend" style="margin-top:10px">Freundschaftsanfrage senden</button><h3>Neue Anfragen</h3><div id="incomingRequests"></div><h3>Gesendete Anfragen</h3><div id="outgoingRequests"></div><h3>Deine Freunde</h3><div id="friendsList"></div><h3>Aktivitäten deiner Freunde</h3><div id="friendActivityFeed"></div></div><div class="card" id="groupArea" style="display:none">
+<h2>👥 Deine Online-Gruppen</h2>
+<p class="muted">Eine Aktivität wird nur einmal in deinem Konto gespeichert. Jede freigegebene Aktivität trägt zusätzlich zum gemeinsamen Garten bei: Alle Mitglieder lassen dieselben Pflanzen wachsen, ohne Einträge zu kopieren.</p>
+<label>Neue Gruppe</label><input id="groupName" maxlength="50" placeholder="z. B. Wandercrew">
+<label>Beschreibung (optional)</label><input id="groupDescription" maxlength="180" placeholder="z. B. gemeinsame Touren und Training">
+<label>Freunde zur Gruppe einladen</label><div id="groupFriends" class="friendChooser"><div class="empty">Deine Freundesliste wird geladen …</div></div>
+<button id="btnCreateGroup" type="button" onclick="createGroup()" style="margin-top:10px">Gruppe erstellen und Einladungen senden</button>
+<h3>Offene Gruppeneinladungen</h3><div id="groupInvites"><div class="empty">Keine Einladungen geladen.</div></div>
+<h3>Meine Gruppen und deren Aktivitäten</h3><div id="groupsList"><div class="empty">Deine Gruppen werden nach der Anmeldung angezeigt.</div></div>
+</div></section>
 <section class="page" id="challenges">
 <div class="card"><h2>🏆 Freundes-Challenges</h2><p class="muted">Erstellt Wettkämpfe unter Freunden: Wer sammelt in einer Woche mehr Liegestütze? Wer trainiert im Monat länger oder läuft weiter?</p>
 <h3>Offene Einladungen</h3><div id="challengeInvites"><div class="empty">Melde dich an, um Einladungen zu sehen.</div></div>
@@ -136,21 +206,74 @@ const escapeHtml=value=>String(value??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','
 const repsTypes=['Liegestütze','Klimmzüge'];
 const durationDistanceTypes=['Joggen','Schwimmen','Radfahren','Snowboarden','Wandern','Spaziergang'];
 const standardTypes=['Liegestütze','Klimmzüge','Workout','Gym','Yoga','Joggen','Schwimmen','Radfahren','Snowboarden','Wandern','Spaziergang','Sonstiges'];
-const plantData=[
- {name:'Sonnenblume',latin:'Helianthus annuus',image:'sunflower.webp',desc:'Hohe einjährige Blütenpflanze mit auffälligem Blütenkorb; ihre Samen sind eine wichtige Nahrung für Vögel.',tag:'Sommer · Vogelnahrung',unlock:1,rare:false},
- {name:'Ringelblume',latin:'Calendula officinalis',image:'calendula.webp',desc:'Robuste orange blühende Gartenpflanze, die gern von Insekten besucht wird.',tag:'Sommer · Insekten',unlock:3,rare:false},
- {name:'Lavendel',latin:'Lavandula angustifolia',image:'lavender.webp',desc:'Mediterraner Halbstrauch mit duftenden Blütenähren und silbrig-grünem Laub.',tag:'Sommer · Bienen',unlock:5,rare:false},
- {name:'Rosmarin',latin:'Salvia rosmarinus',image:'rosemary.webp',desc:'Immergrüner, aromatischer Strauch mit schmalen nadelartigen Blättern.',tag:'Immergrün · Küchenkraut',unlock:8,rare:false},
- {name:'Erdbeere',latin:'Fragaria × ananassa',image:'strawberry.webp',desc:'Niedrige Staude mit weißen Blüten, gezähnten Blättern und roten Sammelfrüchten.',tag:'Frühling/Sommer · Essbar',unlock:12,rare:false},
- {name:'Tulpe',latin:'Tulipa',image:'tulip.webp',desc:'Frühlingsblüher aus Zwiebeln mit markanten kelchförmigen Blüten.',tag:'Frühling · Zierpflanze',unlock:16,rare:false},
- {name:'Tomate',latin:'Solanum lycopersicum',image:'tomato.webp',desc:'Wärmeliebende Nutzpflanze mit gefiedertem Laub und roten Früchten.',tag:'Sommer · Essbar',unlock:22,rare:false},
- {name:'Apfelbaum',latin:'Malus domestica',image:'apple-tree.webp',desc:'Laubbaum mit weiß-rosa Blüten im Frühjahr und Früchten im Spätsommer oder Herbst.',tag:'Obstbaum · Saison',unlock:30,rare:false},
- {name:'Monstera',latin:'Monstera deliciosa',image:'monstera.webp',desc:'Tropische Kletterpflanze mit großen, charakteristisch geschlitzten Blättern.',tag:'Exotisch · Blattschmuck',unlock:0,rare:true},
- {name:'Hanf',latin:'Cannabis sativa',image:'hemp.webp',desc:'Einjährige Pflanzenart mit handförmig zusammengesetzten, schmal gefingerten Blättern; hier als botanische Sammlerpflanze dargestellt.',tag:'Exotisch · Challenge-Belohnung',unlock:0,rare:true},
- {name:'Douglasie',latin:'Pseudotsuga menziesii',image:'douglas-fir.webp',desc:'Nordamerikanischer Nadelbaum mit weichen Nadeln und charakteristischen Zapfen; in Mitteleuropa als Forstbaum bekannt.',tag:'Baum · Immergrün',unlock:0,rare:true},
- {name:'Ginkgo',latin:'Ginkgo biloba',image:'ginkgo.webp',desc:'Altertümliche Baumart mit fächerförmigen Blättern, die sich im Herbst leuchtend gelb färben.',tag:'Exotisch · Baum',unlock:0,rare:true}
+let plantData=[
+ {name:'Sonnenblume',latin:'Helianthus annuus',image:'sunflower.webp',stageImages:['growth/sunflower-1.webp','growth/sunflower-2.webp','growth/sunflower-3.webp'],category:'Blumen',desc:'Hohe einjährige Blütenpflanze mit großem Blütenkorb; die Samen sind eine wichtige Nahrung für Vögel.',tag:'Sommer · Vogelnahrung',unlock:1,rare:false},
+ {name:'Ringelblume',latin:'Calendula officinalis',image:'calendula.webp',category:'Blumen',desc:'Robuste orange blühende Gartenpflanze, die gern von Insekten besucht wird.',tag:'Sommer · Insekten',unlock:3,rare:false},
+ {name:'Lavendel',latin:'Lavandula angustifolia',image:'lavender.webp',stageImages:['growth/lavender-1.webp','growth/lavender-2.webp','growth/lavender-3.webp'],category:'Sträucher',desc:'Mediterraner Halbstrauch mit duftenden Blütenähren und silbrig-grünem Laub.',tag:'Sommer · Bienen',unlock:5,rare:false},
+ {name:'Rosmarin',latin:'Salvia rosmarinus',image:'rosemary.webp',category:'Kräuter',desc:'Immergrüner, aromatischer Halbstrauch mit schmalen nadelartigen Blättern.',tag:'Immergrün · Küchenkraut',unlock:8,rare:false},
+ {name:'Erdbeere',latin:'Fragaria × ananassa',image:'strawberry.webp',stageImages:['growth/strawberry-1.webp','growth/strawberry-2.webp','growth/strawberry-3.webp'],category:'Obst',desc:'Niedrige Staude mit weißen Blüten, gezähnten Blättern und roten Sammelfrüchten.',tag:'Frühling/Sommer · Essbar',unlock:12,rare:false},
+ {name:'Tulpe',latin:'Tulipa gesneriana',image:'tulip.webp',category:'Blumen',desc:'Frühlingsblüher aus Zwiebeln mit markanten kelchförmigen Blüten.',tag:'Frühling · Zierpflanze',unlock:16,rare:false},
+ {name:'Tomate',latin:'Solanum lycopersicum',image:'tomato.webp',category:'Gemüse',desc:'Wärmeliebende Nutzpflanze mit gefiedertem Laub und roten Früchten.',tag:'Sommer · Essbar',unlock:22,rare:false},
+ {name:'Apfelbaum',latin:'Malus domestica',image:'apple-tree.webp',category:'Bäume',desc:'Laubbaum mit weiß-rosa Blüten im Frühjahr und Früchten im Spätsommer oder Herbst.',tag:'Obstbaum · Saison',unlock:30,rare:false},
+ {name:'Monstera',latin:'Monstera deliciosa',image:'monstera.webp',category:'Exoten',desc:'Tropische Kletterpflanze mit großen, charakteristisch geschlitzten Blättern.',tag:'Exotisch · Blattschmuck',unlock:0,rare:true},
+ {name:'Hanf',latin:'Cannabis sativa',image:'hemp.webp',category:'Exoten',desc:'Einjährige Pflanzenart mit handförmig zusammengesetzten, schmal gefingerten Blättern; botanische Sammlerpflanze.',tag:'Exotisch · Challenge-Belohnung',unlock:0,rare:true},
+ {name:'Douglasie',latin:'Pseudotsuga menziesii',image:'douglas-fir.webp',category:'Bäume',desc:'Nordamerikanischer Nadelbaum mit weichen Nadeln und charakteristischen Zapfen.',tag:'Baum · Immergrün',unlock:0,rare:true},
+ {name:'Ginkgo',latin:'Ginkgo biloba',image:'ginkgo.webp',category:'Bäume',desc:'Alte Baumart mit fächerförmigen Blättern, die sich im Herbst leuchtend gelb färben.',tag:'Baum · Herbstfärbung',unlock:0,rare:true},
+ {name:'Bambus',latin:'Bambusoideae',image:'bamboo.webp',category:'Gräser',photo:true,desc:'Immergrünes Süßgras mit kräftigen Halmen; einige Arten bilden dichte Horste.',tag:'Gräser · Immergrün',unlock:36,rare:false},
+ {name:'Hortensie',latin:'Hydrangea macrophylla',image:'hydrangea.webp',category:'Sträucher',photo:true,desc:'Beliebter Zierstrauch mit großen kugeligen oder tellerförmigen Blütenständen.',tag:'Sommer · Blütenstrauch',unlock:42,rare:false},
+ {name:'Heidelbeere',latin:'Vaccinium myrtillus',image:'blueberry.webp',category:'Sträucher',photo:true,desc:'Heimischer Beerenstrauch mit glockenförmigen Blüten und dunkelblauen Beeren.',tag:'Wald · Beeren',unlock:48,rare:false},
+ {name:'Bergahorn',latin:'Acer pseudoplatanus',image:'maple.webp',category:'Bäume',photo:true,desc:'Großer heimischer Laubbaum mit handförmig gelappten Blättern.',tag:'Baum · Laubgehölz',unlock:54,rare:false},
+ {name:'Hibiskus',latin:'Hibiscus rosa-sinensis',image:'hibiscus.webp',category:'Blumen',photo:true,desc:'Tropischer Zierstrauch mit großen, auffälligen Blüten.',tag:'Exotisch · Blüte',unlock:60,rare:false},
+ {name:'Olivenbaum',latin:'Olea europaea',image:'olive-tree.webp',category:'Bäume',photo:true,desc:'Mediterraner, immergrüner Baum mit silbrigem Laub und ölhaltigen Früchten.',tag:'Mediterran · Immergrün',unlock:66,rare:false},
+ {name:'Wiesensalbei',latin:'Salvia pratensis',image:'sage.webp',category:'Blumen',photo:true,desc:'Heimische Wildstaude mit violett-blauen Lippenblüten, beliebt bei Wildbienen.',tag:'Wildblume · Insekten',unlock:72,rare:false},
+ {name:'Ziergras',latin:'Poaceae (Ziergräser)',image:'ornamental-grass.webp',category:'Gräser',photo:true,desc:'Ziergräser bringen Struktur und Bewegung in den Garten; je nach Art bilden sie dichte Horste oder lockere Blütenstände.',tag:'Gräser · Strukturpflanze',unlock:78,rare:false},
+ {name:'Rose',latin:'Rosa (Gartenrosen)',image:'rose-bush.webp',category:'Sträucher',photo:true,desc:'Gartenrose mit gefüllten Blüten und kräftigem, verzweigtem Wuchs.',tag:'Sommer · Blütenstrauch',unlock:82,rare:false},
+ {name:'Zierkirsche',latin:'Prunus serrulata',image:'cherry-tree.webp',category:'Bäume',photo:true,desc:'Zierbaum mit üppiger rosa bis weißer Frühjahrsblüte.',tag:'Frühling · Blütenbaum',unlock:90,rare:false},
+ {name:'Stieleiche',latin:'Quercus robur',image:'oak.webp',category:'Bäume',photo:true,desc:'Langlebiger heimischer Laubbaum mit gelappten Blättern und Eicheln.',tag:'Heimischer Baum · Lebensraum',unlock:96,rare:false},
+ {name:'Hängebirke',latin:'Betula pendula',image:'birch.webp',category:'Bäume',photo:true,desc:'Schlanker Laubbaum mit heller, weißer Rinde und fein beweglichem Laub.',tag:'Heimischer Baum · Pionierart',unlock:104,rare:false},
+ {name:'Waldkiefer',latin:'Pinus sylvestris',image:'pine.webp',category:'Bäume',photo:true,desc:'Heimischer Nadelbaum mit langen Nadeln und charakteristischer rötlicher Borke.',tag:'Nadelbaum · Immergrün',unlock:112,rare:false},
+ {name:'Rhododendron',latin:'Rhododendron spp.',image:'rhododendron.webp',category:'Sträucher',photo:true,desc:'Immergrüner Zierstrauch mit auffälligen Blütenbüscheln im Frühjahr.',tag:'Frühling · Blütenstrauch',unlock:118,rare:false},
+ {name:'Pampasgras',latin:'Cortaderia selloana',image:'pampas-grass.webp',category:'Gräser',photo:true,desc:'Großes Ziergras mit hohen, federartigen Blütenrispen.',tag:'Gräser · Solitärpflanze',unlock:124,rare:false},
+ {name:'Wald-Farn',latin:'Dryopteris filix-mas',image:'fern.webp',category:'Gräser',photo:true,desc:'Schattenliebender Farn mit fein gefiederten Wedeln und typischem Waldcharakter.',tag:'Schatten · Waldpflanze',unlock:130,rare:false},
+ {name:'Funkie',latin:'Hosta spp.',image:'hosta.webp',category:'Blumen',photo:true,desc:'Blattschmuckstaude mit breiten, oft panaschierten Blättern und sommerlichen Blüten.',tag:'Schatten · Blattschmuck',unlock:136,rare:false},
+ {name:'Pfefferminze',latin:'Mentha × piperita',image:'mint.webp',category:'Kräuter',photo:true,desc:'Duftendes, ausdauerndes Küchenkraut mit aromatischen Blättern.',tag:'Küchenkraut · Duft',unlock:142,rare:false},
+ {name:'Basilikum',latin:'Ocimum basilicum',image:'basil.webp',category:'Kräuter',photo:true,desc:'Wärmeliebendes Küchenkraut mit weichen, aromatischen Blättern.',tag:'Sommer · Küchenkraut',unlock:148,rare:false},
+ {name:'Thymian',latin:'Thymus vulgaris',image:'thyme.webp',category:'Kräuter',photo:true,desc:'Kompaktes, trockenheitsverträgliches Würzkraut mit kleinen Blättern und Blüten.',tag:'Mediterran · Bienen',unlock:154,rare:false},
+ {name:'Sonnenhut',latin:'Echinacea purpurea',image:'coneflower.webp',category:'Blumen',photo:true,desc:'Robuste Staude mit auffälligen rosa Blüten und kegelförmigem Blütenzentrum.',tag:'Sommer · Insekten',unlock:160,rare:false},
+ {name:'Himbeere',latin:'Rubus idaeus',image:'raspberry.webp',category:'Obst',photo:true,desc:'Fruchttragender Strauch mit bogigen Ruten und roten Sammelfrüchten.',tag:'Sommer · Naschgarten',unlock:166,rare:false},
+ {name:'Brombeere',latin:'Rubus fruticosus agg.',image:'blackberry.webp',category:'Obst',photo:true,desc:'Kräftiger Beerenstrauch mit weißen Blüten und dunklen Sammelfrüchten.',tag:'Sommer · Naschgarten',unlock:172,rare:false}
 ];
+
+// The online catalog is authoritative; local entries remain as an offline fallback.
+window.fitGrowSetPlantCatalog = items => {
+ const previous=new Map(plantData.map(p=>[p.name,p]));
+ plantData=(items||[]).map(row=>{
+   const base=previous.get(row.common_name)||{};
+   return {...base,name:row.common_name,latin:row.latin_name,category:row.category,
+     desc:row.description||base.desc||'',tag:row.tagline||base.tag||'',
+     image:row.image_path||base.image||'garden-backdrop.webp',photo:true,
+     unlock:Number(row.unlock_activity_count??base.unlock??0),rare:!!row.challenge_only,
+     groupUnlockXp:Number(row.group_unlock_xp||0),growthDays:Number(row.growth_days||120),
+     growthThresholds:[Number(row.growth_xp_stage_2||15),Number(row.growth_xp_stage_3||40),Number(row.growth_xp_stage_4||80),Number(row.growth_xp_stage_5||130)]};
+ }).filter(p=>p.name);
+ renderPlantLibrary();
+};
+
+
 const plantByName=name=>plantData.find(p=>p.name===name);
+const growthThresholds=[0,15,40,80,130];
+const growthLabels=['Keimling','Jungpflanze','Blattwachstum','Knospen / Frucht','Ausgewachsen'];
+const plantCategories=['Alle','Blumen','Bäume','Sträucher','Gräser','Kräuter','Obst','Gemüse','Exoten'];
+let activePlantCategory='Alle';
+function totalActivityXp(){return (db.activities||[]).reduce((s,a)=>s+(Number(a.xp)||0),0);}
+function ensurePlantProgress(){if(!db.plantProgress||typeof db.plantProgress!=='object')db.plantProgress={};const seed=Math.min(200,totalActivityXp());for(const name of db.plants||[]){if(!db.plantProgress[name]||typeof db.plantProgress[name]!=='object')db.plantProgress[name]={xp:seed};else db.plantProgress[name].xp=Math.max(0,Number(db.plantProgress[name].xp)||0);}}
+function growthInfo(name){ensurePlantProgress();const xp=Math.max(0,Number(db.plantProgress[name]?.xp)||0);const p=plantByName(name);const thresholds=[0,...(p?.growthThresholds||growthThresholds.slice(1))];let stage=1;for(let i=1;i<thresholds.length;i++){if(xp>=thresholds[i])stage=i+1;else break;}const current=thresholds[stage-1];const next=thresholds[stage]??current;const percent=stage===5?100:Math.max(0,Math.min(100,Math.round((xp-current)/(next-current)*100)));return {xp,stage,label:growthLabels[stage-1],percent,nextXp:next};}
+function growthImage(p,stage){if(p.stageImages){const ix=stage<=1?0:stage<=3?1:2;return p.stageImages[ix];}return p.image;}
+function advancePlantGrowth(points){ensurePlantProgress();for(const name of db.plants||[]){const state=db.plantProgress[name]||{xp:0};state.xp=Math.min(2000,(Number(state.xp)||0)+Math.max(0,Number(points)||0));db.plantProgress[name]=state;}}
+function initPlantFilters(){const el=$('plantFilters');if(!el)return;el.innerHTML=plantCategories.map(cat=>`<button type="button" class="${cat===activePlantCategory?'active':''}" onclick="setPlantCategory('${cat}')">${cat}</button>`).join('');}
+function setPlantCategory(cat){activePlantCategory=plantCategories.includes(cat)?cat:'Alle';initPlantFilters();renderPlantLibrary();}
+function renderPlantLibrary(){const q=($('plantSearch')?.value||'').trim().toLowerCase();const list=plantData.filter(p=>(activePlantCategory==='Alle'||p.category===activePlantCategory)&&(!q||`${p.name} ${p.latin} ${p.desc} ${p.category}`.toLowerCase().includes(q)));$('plantLibrary').innerHTML=list.map(p=>plantCard(p,(db.plants||[]).includes(p.name))).join('')||'<div class="empty">Keine passende Pflanze gefunden.</div>';}
+
 const inputModeFor=name=>{
  if(repsTypes.includes(name))return 'reps';
  if(durationDistanceTypes.includes(name))return 'duration_distance';
@@ -189,6 +312,8 @@ function addCustomActivity(){
 }
 function renderCustomActivityList(){ $('customActivityList').innerHTML=db.customActivities.length?`Deine eigenen Aktivitäten: ${db.customActivities.map(a=>`<span class="badge">${escapeHtml(a.name)}</span>`).join(' ')}`:'Noch keine eigenen Aktivitäten angelegt.'; }
 $('activityDate').value=today();
+$('plantSearch')?.addEventListener('input',renderPlantLibrary);
+initPlantFilters();
 fields();
 $('activityForm').addEventListener('submit',e=>{
  e.preventDefault();const type=$('activityType').value;const mode=inputModeFor(type);
@@ -200,12 +325,13 @@ $('activityForm').addEventListener('submit',e=>{
  if(mode==='distance'&&k<=0)return toast('Bitte eine Distanz eintragen.');
  const points=mode==='reps'?Math.max(1,Math.round(r/5)):Math.max(1,Math.round(m/5+k*2));
  db.activities.unshift({id:`local-${Date.now()}-${Math.random().toString(36).slice(2,7)}`,type,reps:r,duration:m,distance:k,date:$('activityDate').value,note:$('note').value.trim(),visibility:$('activityVisibility').value||'friends',xp:points});
+ advancePlantGrowth(points);
  unlockActivityPlants();
  e.target.reset();$('activityDate').value=today();fields();save();toast('Aktivität gespeichert 🌱');navigate('home');
 });
-function unlockActivityPlants(){for(const p of plantData.filter(p=>!p.rare&&db.activities.length>=p.unlock)){if(!db.plants.includes(p.name))db.plants.push(p.name);}}
-function plantCard(p,owned){return `<div class="plant ${owned?'owned':'locked'}"><div class="plantVisual"><img src="./plants/${p.image}" alt="${escapeHtml(p.name)}" loading="lazy"></div><div class="plantCopy"><b>${escapeHtml(p.name)}${owned?' ✓':''}</b><div class="latin">${escapeHtml(p.latin)}</div><p class="muted">${escapeHtml(p.desc)}</p><span class="badge">${escapeHtml(p.rare?'🏆 Challenge-Belohnung':`Freischaltung ab ${p.unlock} Aktivitäten`)}</span><br><span class="badge">${escapeHtml(p.tag)}</span></div></div>`;}
-function renderGardenScene(id){const el=$(id);if(!el)return;const visible=(db.plants||[]).map(plantByName).filter(Boolean);const display=(visible.length?visible:[plantData[0],plantData[2],plantData[4]]).slice(-5);el.innerHTML=display.map((p,i)=>`<img class="gardenPlant" style="--plant-height:${Math.max(74,132-i*8)}px" src="./plants/${p.image}" alt="${escapeHtml(p.name)}" loading="lazy">`).join('');}
+function unlockActivityPlants(){ensurePlantProgress();for(const p of plantData.filter(p=>!p.rare&&db.activities.length>=p.unlock)){if(!db.plants.includes(p.name)){db.plants.push(p.name);db.plantProgress[p.name]={xp:0};}}}
+function plantCard(p,owned){const g=owned?growthInfo(p.name):null;const image=owned?growthImage(p,g.stage):p.image;const stageScale=owned?['48%','62%','76%','90%','100%'][g.stage-1]:'100%';return `<div class="plant ${owned?'owned':'locked'}"><div class="plantVisual"><img class="${p.photo?'photo':''}" src="./plants/${image}" alt="${escapeHtml(p.name)}" loading="lazy"></div><div class="plantCopy"><b>${escapeHtml(p.name)}${owned?' ✓':''}</b><div class="latin">${escapeHtml(p.latin)}</div><p class="muted">${escapeHtml(p.desc)}</p><div class="plantMeta"><span class="badge">${escapeHtml(p.category)}</span><span class="badge">${escapeHtml(p.rare?'🏆 Challenge-Belohnung':`Freischaltung ab ${p.unlock} Aktivitäten`)}</span></div>${owned?`<div class="plantGrowth"><div class="plantGrowthHead"><span>${escapeHtml(g.label)}</span><span>${g.percent}%</span></div><div class="plantGrowthBar"><i style="width:${g.percent}%"></i></div><div class="plantStages">${[1,2,3,4,5].map(n=>`<span class="${g.stage>=n?'done':''}"></span>`).join('')}</div><div class="formHint">${g.stage===5?'Pflanze ausgewachsen. Weiteres Training stärkt deinen Garten.':`${Math.max(0,g.nextXp-g.xp)} XP bis zur nächsten Wachstumsstufe`}</div></div>`:''}<span class="badge">${escapeHtml(p.tag)}</span></div></div>`;}
+function renderGardenScene(id){const el=$(id);if(!el)return;ensurePlantProgress();const visible=(db.plants||[]).map(plantByName).filter(Boolean);const display=(visible.length?visible:[plantData[0],plantData[2],plantData[4]]).slice(-5);el.innerHTML=display.map(p=>{const g=(db.plants||[]).includes(p.name)?growthInfo(p.name):{stage:1,label:'Keimling',percent:0};const heights=[54,72,88,105,120];const image=growthImage(p,g.stage);return `<div class="gardenPlantItem"><img class="gardenPlantImg ${p.photo?'photo':''}" style="--plant-height:${heights[g.stage-1]}px" src="./plants/${image}" alt="${escapeHtml(p.name)}" loading="lazy"><div class="gardenPlantTag"><b>${escapeHtml(p.name)}</b><span>${escapeHtml(g.label)}</span><div class="gardenMiniBar"><i style="width:${g.percent}%"></i></div></div></div>`;}).join('');}
 function entry(a){return `<div class="entry"><div><strong>${escapeHtml(a.type)}</strong><small>${escapeHtml(a.date)}${a.reps?` · ${a.reps} Wdh.`:''}${a.duration?` · ${a.duration} Min`:''}${a.distance?` · ${a.distance} km`:''}${a.note?`<br>${escapeHtml(a.note)}`:''}${a.visibility==='private'?' · 🔒 Nur ich':' · 👥 Freunde'}</small></div><span class="xp">+${Number(a.xp||0)} XP</span></div>`;}
 function dateObj(s){return new Date(`${s}T12:00:00`)}
 function last7(){let arr=[];let now=dateObj(today());for(let i=6;i>=0;i--){let x=new Date(now);x.setDate(x.getDate()-i);arr.push(`${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`)}return arr;}
@@ -214,17 +340,49 @@ function sumReps(acts,type){return acts.filter(a=>a.type===type).reduce((s,a)=>s
 function renderStats(){let all=db.activities,dates=last7(),start=weekRange(),monthStart=today().slice(0,7)+'-01';let filter=statMode==='week'?a=>a.date>=start&&a.date<=today():statMode==='month'?a=>a.date>=monthStart&&a.date<=today():a=>true;let list=all.filter(filter);$('periodPush').textContent=sumReps(list,'Liegestütze');$('periodPull').textContent=sumReps(list,'Klimmzüge');$('periodCount').textContent=list.length;$('periodRange').textContent=statMode==='week'?`Zeitraum: ${start} bis ${today()}`:statMode==='month'?`Zeitraum: ${monthStart} bis ${today()}`:'Alle gespeicherten Aktivitäten';
  function chart(el,type,labels){let vals=labels.map(d=>all.filter(a=>a.date===d&&a.type===type).reduce((s,a)=>s+(Number(a.reps)||0),0)),max=Math.max(1,...vals);$(el).innerHTML=labels.map((d,i)=>`<div class="barwrap"><div class="bar" title="${vals[i]}" style="height:${Math.max(vals[i]?4:1,vals[i]/max*75)}px"></div><small>${vals[i]}</small><label>${dateObj(d).toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit'})}</label></div>`).join('');}
  chart('pushChart','Liegestütze',dates);chart('pullChart','Klimmzüge',dates);let counts={};list.forEach(a=>counts[a.type]=(counts[a.type]||0)+1);$('typeBreakdown').innerHTML=Object.entries(counts).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div class="statLine"><span>${escapeHtml(k)}</span><b>${v}×</b></div>`).join('')||'<p class="muted">Keine Aktivitäten in diesem Zeitraum.</p>';$('totalAct').textContent=all.length;$('totalMinutes').textContent=all.reduce((s,a)=>s+(Number(a.duration)||0),0);$('totalKm').textContent=all.reduce((s,a)=>s+(Number(a.distance)||0),0).toFixed(1);}
-function render(){let a=db.activities,x=a.reduce((s,v)=>s+(Number(v.xp)||0),0);$('levelBadge').textContent=`Level ${Math.floor(x/100)+1} · ${x} XP`;$('homeActivities').textContent=a.length;$('homeXP').textContent=x;$('homePlants').textContent=db.plants.length;renderGardenScene('gardenHome');renderGardenScene('gardenPlants');let t=a.filter(v=>v.date===today());$('todayActivities').textContent=t.length;$('todayPush').textContent=sumReps(t,'Liegestütze');$('todayPull').textContent=sumReps(t,'Klimmzüge');let lw=a.filter(v=>v.date>=weekRange()&&v.date<=today());$('lastWeekPush').textContent=sumReps(lw,'Liegestütze');$('lastWeekPull').textContent=sumReps(lw,'Klimmzüge');$('lastWeekActivities').textContent=lw.length;$('lastWeekDates').textContent=`Letzte 7 Tage: ${weekRange()} bis ${today()}`;$('recent').innerHTML=a.slice(0,5).map(entry).join('')||'<div class="empty">Noch keine Aktivitäten. Dein Garten wartet!</div>';$('activityList').innerHTML=a.map(entry).join('')||'<div class="empty">Noch keine Aktivitäten gespeichert.</div>';$('collection').innerHTML=db.plants.map(n=>plantByName(n)).filter(Boolean).map(p=>plantCard(p,true)).join('')||'<div class="empty">Pflanzen schaltest du durch Bewegung frei oder gewinnst sie in Challenges.</div>';$('plantLibrary').innerHTML=plantData.map(p=>plantCard(p,db.plants.includes(p.name))).join('');renderCustomActivityList();$('groupsList').innerHTML=db.groups.map(g=>`<div class="challenge"><b>🌳 ${escapeHtml(g.name)}</b><p class="muted">Mitglieder: ${g.members.map(escapeHtml).join(', ')}</p></div>`).join('');renderStats();}
+function render(){let a=db.activities,x=a.reduce((s,v)=>s+(Number(v.xp)||0),0);$('levelBadge').textContent=`Level ${Math.floor(x/100)+1} · ${x} XP`;$('homeActivities').textContent=a.length;$('homeXP').textContent=x;$('homePlants').textContent=db.plants.length;renderGardenScene('gardenHome');renderGardenScene('gardenPlants');let t=a.filter(v=>v.date===today());$('todayActivities').textContent=t.length;$('todayPush').textContent=sumReps(t,'Liegestütze');$('todayPull').textContent=sumReps(t,'Klimmzüge');let lw=a.filter(v=>v.date>=weekRange()&&v.date<=today());$('lastWeekPush').textContent=sumReps(lw,'Liegestütze');$('lastWeekPull').textContent=sumReps(lw,'Klimmzüge');$('lastWeekActivities').textContent=lw.length;$('lastWeekDates').textContent=`Letzte 7 Tage: ${weekRange()} bis ${today()}`;$('recent').innerHTML=a.slice(0,5).map(entry).join('')||'<div class="empty">Noch keine Aktivitäten. Dein Garten wartet!</div>';$('activityList').innerHTML=a.map(entry).join('')||'<div class="empty">Noch keine Aktivitäten gespeichert.</div>';$('collection').innerHTML=db.plants.map(n=>plantByName(n)).filter(Boolean).map(p=>plantCard(p,true)).join('')||'<div class="empty">Pflanzen schaltest du durch Bewegung frei oder gewinnst sie in Challenges.</div>';renderPlantLibrary();renderCustomActivityList();renderStats();}
 function save(){localStorage.setItem(DB,JSON.stringify(db));render();if(window.fitGrowCloudSyncActivities)window.fitGrowCloudSyncActivities().catch(()=>{});if(window.fitGrowCloudSyncCustomActivities)window.fitGrowCloudSyncCustomActivities().catch(()=>{});if(window.fitGrowCloudSyncGarden)window.fitGrowCloudSyncGarden().catch(()=>{});}
 window.fitGrowGetAppData=()=>db;
 window.fitGrowSetActivities=activities=>{db.activities=Array.isArray(activities)?activities:[];unlockActivityPlants();localStorage.setItem(DB,JSON.stringify(db));render();};
-window.fitGrowRestoreAppData=data=>{db={...blank,...(data||{})};localStorage.setItem(DB,JSON.stringify(db));render();};
+window.fitGrowRestoreAppData=data=>{db={...blank,...(data||{})};ensurePlantProgress();localStorage.setItem(DB,JSON.stringify(db));render();};
 window.fitGrowSetCustomActivities=items=>{db.customActivities=Array.isArray(items)?items:[];localStorage.setItem(DB,JSON.stringify(db));fillActivityOptions();fillChallengeActivityOptions();fields();renderCustomActivityList();};
-window.fitGrowSetPlants=items=>{db.plants=[...new Set([...(db.plants||[]),...(items||[])])];localStorage.setItem(DB,JSON.stringify(db));render();};
+window.fitGrowSetPlants=items=>{const previous=new Set(db.plants||[]);const names=(items||[]).map(x=>typeof x==='string'?x:x.plant_name).filter(Boolean);db.plants=[...new Set([...(db.plants||[]),...names])];db.plantProgress=db.plantProgress&&typeof db.plantProgress==='object'?db.plantProgress:{};for(const item of (items||[])){if(typeof item==='object'&&item.plant_name){const remoteXp=Math.max(0,Number(item.growth_xp)||0);const localState=db.plantProgress[item.plant_name];db.plantProgress[item.plant_name]={xp:localState?Math.max(Number(localState.xp)||0,remoteXp):remoteXp};}else if(typeof item==='string'&&!db.plantProgress[item]){db.plantProgress[item]={xp:0};}}for(const name of previous){if(!db.plantProgress[name])db.plantProgress[name]={xp:Math.min(200,totalActivityXp())};}localStorage.setItem(DB,JSON.stringify(db));render();};
 function navigate(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach((b,i)=>b.classList.toggle('active',['home','activity','garden','groups','challenges','stats'][i]===id));if(id==='stats')renderStats();if(id==='challenges')refreshChallengeCenter();scrollTo({top:0,behavior:'smooth'});}
 function setStatsMode(mode){statMode=mode;['week','month','all'].forEach(v=>$('tab'+v[0].toUpperCase()+v.slice(1)).classList.toggle('selected',v===mode));renderStats();}
 function toast(message){$('toast').textContent=message;$('toast').style.display='block';clearTimeout(window._growToastTimer);window._growToastTimer=setTimeout(()=>$('toast').style.display='none',2600);}
-function createGroup(){let name=$('groupName')?.value.trim();if(!name)return toast('Bitte Gruppennamen eingeben');let members=($('groupMembers').value||'Du').split(',').map(x=>x.trim()).filter(Boolean);db.groups.push({name,members});$('groupName').value='';$('groupMembers').value='';save();toast('Gruppe angelegt 🌳');}
+async function plantGroupGarden(groupId){
+ const select=$(`groupPlantSelect-${groupId}`);
+ const speciesId=select?.value;
+ if(!speciesId)return toast('Bitte zuerst eine freigeschaltete Pflanze auswählen.');
+ if(!window.fitGrowOnline?.plantInSharedGarden)return toast('Bitte anmelden, um den Gruppengarten zu bepflanzen.');
+ try{
+   await window.fitGrowOnline.plantInSharedGarden(groupId,speciesId);
+   toast('Pflanze wurde in den gemeinsamen Garten gesetzt. 🌱');
+   await window.fitGrowOnline.refreshGroups();
+ }catch(e){toast(`Pflanze konnte nicht gesetzt werden: ${e.message||e}`);}
+}
+
+async function createGroup(){
+ const name=$('groupName')?.value.trim();
+ const description=$('groupDescription')?.value.trim()||'';
+ const inviteeIds=[...$('groupFriends').querySelectorAll('input[type="checkbox"]:checked')].map(el=>el.value);
+ if(!name||name.length<3)return toast('Bitte einen Gruppennamen mit mindestens 3 Zeichen eingeben.');
+ if(!inviteeIds.length)return toast('Bitte mindestens einen Freund auswählen.');
+ if(!window.fitGrowOnline?.createGroup)return toast('Bitte zuerst anmelden und Supabase verbinden.');
+ try{
+   await window.fitGrowOnline.createGroup({name,description,invitee_ids:inviteeIds});
+   $('groupName').value='';$('groupDescription').value='';
+   await window.fitGrowOnline.refreshGroups();
+   toast('Gruppe erstellt – Einladungen wurden versendet. 🌳');
+ }catch(e){toast(`Gruppe konnte nicht erstellt werden: ${e.message||e}`);}
+}
+async function respondGroupInvite(id,accept){
+ try{
+   await window.fitGrowOnline.respondGroupInvite(id,accept);
+   await window.fitGrowOnline.refreshGroups();
+   toast(accept?'Gruppeneinladung angenommen.':'Gruppeneinladung abgelehnt.');
+ }catch(e){toast(`Einladung konnte nicht verarbeitet werden: ${e.message||e}`);}
+}
 function updateChallengeMetrics(){const type=$('challengeActivityType').value;const mode=inputModeFor(type);const sel=$('challengeMetric');const options=[];if(mode==='reps')options.push(['repetitions','Gesamte Wiederholungen']);if(['duration','duration_distance'].includes(mode))options.push(['duration_minutes','Gesamte Trainingszeit (Minuten)']);if(['distance','duration_distance'].includes(mode))options.push(['distance_km','Gesamte Distanz (km)']);const previous=sel.value;sel.innerHTML=options.map(([value,label])=>`<option value="${value}">${label}</option>`).join('');if(options.some(o=>o[0]===previous))sel.value=previous;}
 $('challengeActivityType').addEventListener('change',updateChallengeMetrics);
 function updateChallengeDates(){const period=$('challengePeriod').value;if(period==='custom'){$('challengeStart').disabled=false;$('challengeEnd').disabled=false;return;}const start=new Date(`${today()}T12:00:00`);const end=new Date(start);if(period==='week')end.setDate(end.getDate()+6);else{const nextMonth=new Date(start.getFullYear(),start.getMonth()+1,1);const lastDay=new Date(nextMonth.getFullYear(),nextMonth.getMonth()+1,0).getDate();nextMonth.setDate(Math.min(start.getDate(),lastDay));nextMonth.setDate(nextMonth.getDate()-1);end.setTime(nextMonth.getTime());}$('challengeStart').value=today();$('challengeEnd').value=`${end.getFullYear()}-${String(end.getMonth()+1).padStart(2,'0')}-${String(end.getDate()).padStart(2,'0')}`;$('challengeStart').disabled=true;$('challengeEnd').disabled=true;}
@@ -248,10 +406,10 @@ async function refreshChallengeCenter(){
  }catch(e){$('challengeList').innerHTML=`<div class="empty">Challenges konnten nicht geladen werden: ${escapeHtml(e.message||e)}</div>`;}
 }
 async function respondChallenge(id,accept){try{await window.fitGrowOnline.respondChallengeInvite(id,accept);toast(accept?'Challenge angenommen!':'Einladung abgelehnt.');await refreshChallengeCenter();}catch(e){toast(`Aktion fehlgeschlagen: ${e.message||e}`);}}
-async function claimChallengeReward(id,plantName){try{const success=await window.fitGrowOnline.claimChallengeReward(id);if(success){if(!db.plants.includes(plantName))db.plants.push(plantName);localStorage.setItem(DB,JSON.stringify(db));render();toast(`${plantName} gewonnen! Sie ist in deinem Garten. 🌿`);}else toast('Diese Belohnung kann noch nicht abgeholt werden.');await refreshChallengeCenter();}catch(e){toast(`Belohnung konnte nicht abgeholt werden: ${e.message||e}`);}}
+async function claimChallengeReward(id,plantName){try{const success=await window.fitGrowOnline.claimChallengeReward(id);if(success){if(!db.plants.includes(plantName)){db.plants.push(plantName);db.plantProgress[plantName]={xp:0};}localStorage.setItem(DB,JSON.stringify(db));render();toast(`${plantName} gewonnen! Sie ist als Keimling in deinem Garten. 🌿`);}else toast('Diese Belohnung kann noch nicht abgeholt werden.');await refreshChallengeCenter();}catch(e){toast(`Belohnung konnte nicht abgeholt werden: ${e.message||e}`);}}
 function exportBackup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fit-mit-grow-backup.json';a.click();URL.revokeObjectURL(a.href);}
 function importBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db={...blank,...JSON.parse(r.result)};save();toast('Backup importiert');}catch{toast('Backup konnte nicht gelesen werden');}};r.readAsText(f);}
 function resetAll(){if(confirm('Alle Fit mit Grow Daten auf diesem Gerät löschen?')){db=structuredClone(blank);save();toast('Daten gelöscht');}}
-fillActivityOptions();fillChallengeActivityOptions();updateChallengeMetrics();render();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=6').catch(()=>{}));
+ensurePlantProgress();fillActivityOptions();fillChallengeActivityOptions();updateChallengeMetrics();initPlantFilters();render();
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=8').catch(()=>{}));
 </script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script><script src="./auth.js"></script></body></html>
