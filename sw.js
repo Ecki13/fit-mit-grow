@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fit-mit-grow-v9';
+const CACHE_NAME = 'fit-mit-grow-v10';
 const APP_PREFIX = 'fit-mit-grow-';
 const CORE_FILES = ['./','./index.html','./manifest.webmanifest','./config.js','./auth.js'];
 const PLANT_FILES = [
