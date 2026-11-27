@@ -1,6 +1,6 @@
-const CACHE_NAME = 'fit-mit-grow-v10';
+const CACHE_NAME = 'fit-mit-grow-v12';
 const APP_PREFIX = 'fit-mit-grow-';
-const CORE_FILES = ['./','./index.html','./manifest.webmanifest','./config.js','./auth.js'];
+const CORE_FILES = ['./','./index.html','./manifest.webmanifest','./config.js','./auth.js','./plant-details-v7.js'];
 const PLANT_FILES = [
  './plants/sunflower.webp','./plants/calendula.webp','./plants/lavender.webp','./plants/rosemary.webp',
  './plants/strawberry.webp','./plants/tulip.webp','./plants/tomato.webp','./plants/apple-tree.webp',
@@ -11,7 +11,11 @@ const PLANT_FILES = [
  './plants/rose-bush.webp', './plants/cherry-tree.webp', './plants/oak.webp', './plants/birch.webp', './plants/pine.webp', './plants/rhododendron.webp', './plants/pampas-grass.webp', './plants/fern.webp', './plants/hosta.webp', './plants/mint.webp', './plants/basil.webp', './plants/thyme.webp', './plants/coneflower.webp', './plants/raspberry.webp', './plants/blackberry.webp',
  './plants/growth/sunflower-1.webp','./plants/growth/sunflower-2.webp','./plants/growth/sunflower-3.webp',
  './plants/growth/lavender-1.webp','./plants/growth/lavender-2.webp','./plants/growth/lavender-3.webp',
- './plants/growth/strawberry-1.webp','./plants/growth/strawberry-2.webp','./plants/growth/strawberry-3.webp'
+ './plants/growth/strawberry-1.webp','./plants/growth/strawberry-2.webp','./plants/growth/strawberry-3.webp',
+ './plants/garden-base-v7.webp',
+ './plants/cutouts/sunflower.webp','./plants/cutouts/calendula.webp','./plants/cutouts/lavender.webp','./plants/cutouts/rosemary.webp',
+ './plants/cutouts/strawberry.webp','./plants/cutouts/tulip.webp','./plants/cutouts/tomato.webp','./plants/cutouts/monstera.webp',
+ './plants/cutouts/hemp.webp','./plants/cutouts/douglas-fir.webp','./plants/cutouts/ginkgo.webp'
 ];
 const OPTIONAL_FILES = ['./icons/icon-192.png','./icons/icon-512.png','./icons/icon-512-maskable.png',...PLANT_FILES];
 self.addEventListener('install',event=>{event.waitUntil((async()=>{const cache=await caches.open(CACHE_NAME);for(const file of CORE_FILES){try{await cache.add(file)}catch(e){console.warn('Cache core file failed:',file,e)}}for(const file of OPTIONAL_FILES){try{await cache.add(file)}catch(e){console.warn('Optional asset missing:',file)}}await self.skipWaiting()})())});

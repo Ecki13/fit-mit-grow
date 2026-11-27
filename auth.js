@@ -28,10 +28,10 @@
   async function syncActivities(initial=false){if(!currentUser||syncing){if(syncing)syncQueued=true;return;}syncing=true;try{if(initial&&!initialSyncComplete){if(!localStorage.getItem('fitGrowGuestBackup'))localStorage.setItem('fitGrowGuestBackup',JSON.stringify(localData()));const local=Array.isArray(localData().activities)?localData().activities:[];const flag=`fitGrowImported_${currentUser.id}`;if(local.length&&localStorage.getItem(flag)!=='yes'){const doImport=confirm(`Auf diesem Gerät liegen ${local.length} lokale Aktivitäten. Sollen sie in das Konto ${currentUser.email} übertragen werden? Nur bestätigen, wenn sie zu diesem Konto gehören.`);if(doImport){await uploadLocalActivities();localStorage.setItem(flag,'yes');}}const remote=await loadCloudActivities();const merged=localStorage.getItem(flag)==='yes'?mergeActivities(local,remote):remote;if(window.fitGrowSetActivities)window.fitGrowSetActivities(merged);initialSyncComplete=true;status('Angemeldet – Aktivitäten sind mit deinem Konto synchronisiert.');}else{await uploadLocalActivities();status('Aktivitäten mit der Cloud synchronisiert.');if(currentUser)await loadGroups();}}catch(e){status(`Aktivitätssynchronisierung fehlgeschlagen: ${e.message||e}`,true);}finally{syncing=false;if(syncQueued){syncQueued=false;setTimeout(()=>syncActivities(false),250);}}}
   async function syncCustomActivities(){if(!currentUser)return;const items=(localData().customActivities||[]).map(a=>({user_id:currentUser.id,name:String(a.name||'').trim(),input_mode:a.input_mode||'duration'})).filter(a=>a.name);if(items.length){const {error}=await client.from('custom_activity_types').upsert(items,{onConflict:'user_id,name'});if(error)throw error;}}
   async function loadCustomActivities(){if(!currentUser)return;const {data,error}=await client.from('custom_activity_types').select('name,input_mode').eq('user_id',currentUser.id).order('name');if(error)throw error;if(window.fitGrowSetCustomActivities)window.fitGrowSetCustomActivities(data||[]);}
-  async function loadPlantCatalog(){if(!currentUser)return;const {data,error}=await client.from('plant_species').select('id,common_name,latin_name,category,description,tagline,image_path,rarity,challenge_only,unlock_activity_count,group_unlock_xp,growth_days,growth_xp_stage_2,growth_xp_stage_3,growth_xp_stage_4,growth_xp_stage_5,sort_order').eq('is_active',true).order('sort_order');if(error)throw error;plantCatalogCache=data||[];if(window.fitGrowSetPlantCatalog)window.fitGrowSetPlantCatalog(plantCatalogCache);}
+  async function loadPlantCatalog(){if(!currentUser)return;const {data,error}=await client.from('plant_species').select('id,common_name,latin_name,category,description,tagline,image_path,rarity,challenge_only,unlock_activity_count,group_unlock_xp,growth_days,growth_xp_stage_2,growth_xp_stage_3,growth_xp_stage_4,growth_xp_stage_5,sort_order,botanical_family,origin_region,natural_habitat,uses_text,special_traits,care_notes,light_requirement,water_requirement,growth_form,garden_layer,resilience_days,wilt_period_days,garden_scale,garden_image_path').eq('is_active',true).order('sort_order');if(error)throw error;plantCatalogCache=data||[];if(window.fitGrowSetPlantCatalog)window.fitGrowSetPlantCatalog(plantCatalogCache);}
 
   async function syncGarden(){if(!currentUser)return;const {data:garden,error:gError}=await client.from('gardens').select('id').eq('owner_id',currentUser.id).is('group_id',null).limit(1).maybeSingle();if(gError)throw gError;let gardenId=garden?.id;if(!gardenId){const {data:newGarden,error}=await client.from('gardens').insert({owner_id:currentUser.id,name:'Mein Garten',group_id:null,garden_type:'personal'}).select('id').single();if(error)throw error;gardenId=newGarden.id;}const app=localData();const names=[...new Set(app.plants||[])];const progress=app.plantProgress||{};const thresholds=[0,15,40,80,130];for(const plantName of names){const xp=Math.max(0,Number(progress[plantName]?.xp)||0);let stage=1;for(let i=1;i<thresholds.length;i++){if(xp>=thresholds[i])stage=i+1;else break;}const {data:existing,error:checkError}=await client.from('garden_plants').select('id,growth_xp').eq('garden_id',gardenId).eq('plant_name',plantName).limit(1).maybeSingle();if(checkError)throw checkError;const growthXp=Math.max(xp,Number(existing?.growth_xp)||0);let growthStage=1;for(let i=1;i<thresholds.length;i++){if(growthXp>=thresholds[i])growthStage=i+1;else break;}if(!existing){const {error}=await client.from('garden_plants').insert({garden_id:gardenId,plant_name:plantName,plant_type:'activity_unlock',growth_stage:growthStage,growth_xp:growthXp});if(error)throw error;}else{const {error}=await client.from('garden_plants').update({growth_stage:growthStage,growth_xp:growthXp}).eq('id',existing.id);if(error)throw error;}}}
-  async function loadGardenPlants(){if(!currentUser)return;const {data:g,error:gError}=await client.from('gardens').select('id').eq('owner_id',currentUser.id).is('group_id',null);if(gError)throw gError;const ids=(g||[]).map(x=>x.id);if(!ids.length)return;const {data,error}=await client.from('garden_plants').select('plant_name,growth_stage,growth_xp').in('garden_id',ids);if(error)throw error;if(window.fitGrowSetPlants)window.fitGrowSetPlants(data||[]);}
+  async function loadGardenPlants(){if(!currentUser)return;const {data:g,error:gError}=await client.from('gardens').select('id').eq('owner_id',currentUser.id).is('group_id',null);if(gError)throw gError;const ids=(g||[]).map(x=>x.id);if(!ids.length)return;const {data,error}=await client.from('garden_plants').select('plant_name,growth_stage,growth_xp,last_cared_at,health_percent').in('garden_id',ids);if(error)throw error;if(window.fitGrowSetPlants)window.fitGrowSetPlants(data||[]);}
   function nameFor(map,id){const p=map.get(id);return p?.display_name||p?.username||'Unbekannter Nutzer';}
   async function getFriendProfiles(){if(!currentUser)return[];const uid=currentUser.id;const {data,error}=await client.from('friendships').select('user_id,friend_id').or(`user_id.eq.${uid},friend_id.eq.${uid}`);if(error)throw error;const ids=[...new Set((data||[]).map(r=>r.user_id===uid?r.friend_id:r.user_id))];if(!ids.length){friendsCache=[];return[];}const {data:profiles,error:pError}=await client.from('profiles').select('id,username,display_name').in('id',ids);if(pError)throw pError;friendsCache=profiles||[];return friendsCache;}
   async function loadFriends(){
@@ -155,6 +155,7 @@
     }
 
     const groupCards=[];
+    window._fitGrowSharedGardenRenders=[];
     for(const groupId of ownGroupIds){
       const group=groupMap.get(groupId);
       if(!group)continue;
@@ -193,32 +194,23 @@
       let sharedGardenMarkup='<div class="sharedGardenNote">Der gemeinsame Garten wird angelegt …</div>';
       if(sharedGarden){
         const {data:sharedPlants,error:spError}=await client.from('garden_plants')
-          .select('id,plant_name,species_id,growth_stage,growth_xp').eq('garden_id',sharedGarden.id)
-          .order('planted_at',{ascending:true});
+          .select('id,plant_name,species_id,growth_stage,growth_xp,last_cared_at,health_percent')
+          .eq('garden_id',sharedGarden.id).order('planted_at',{ascending:true});
         if(spError)throw spError;
-        const speciesMap=new Map(plantCatalogCache.map(p=>[p.id,p]));
-        const plantTiles=(sharedPlants||[]).map(row=>{
-          const spec=speciesMap.get(row.species_id)||plantCatalogCache.find(p=>p.common_name===row.plant_name);
-          const image=spec?.image_path||'garden-backdrop.webp';
-          const stageLabels=['Keimling','Jungpflanze','Blattwachstum','Knospen / Frucht','Ausgewachsen'];
-          const stage=Math.max(1,Math.min(5,Number(row.growth_stage)||1));
-          const thresholds=spec?[spec.growth_xp_stage_2,spec.growth_xp_stage_3,spec.growth_xp_stage_4,spec.growth_xp_stage_5]:[15,40,80,130];
-          const lower=stage===1?0:Number(thresholds[stage-2]||0);
-          const upper=stage===5?lower:Number(thresholds[stage-1]||130);
-          const pct=stage===5?100:Math.max(0,Math.min(100,Math.round((Number(row.growth_xp||0)-lower)/Math.max(1,upper-lower)*100)));
-          const plantHeight=[42,52,64,78,92][stage-1];
-          return `<div class="sharedGardenPlant"><img style="height:${plantHeight}px" src="./plants/${escapeHtml(image)}" alt="${escapeHtml(row.plant_name)}" loading="lazy"><b>${escapeHtml(row.plant_name)}</b><small>${escapeHtml(stageLabels[stage-1])}</small><div class="sharedGardenBar"><i style="width:${pct}%"></i></div></div>`;
-        }).join('')||'<div class="sharedGardenNote">Noch keine Pflanzen. Setzt gemeinsam die ersten Samen!</div>';
         const plantedSpecies=new Set((sharedPlants||[]).map(p=>p.species_id).filter(Boolean));
         const eligible=plantCatalogCache.filter(p=>!p.challenge_only&&!plantedSpecies.has(p.id)&&Number(p.group_unlock_xp||0)<=Number(sharedGarden.xp||0));
         const locked=plantCatalogCache.filter(p=>!p.challenge_only&&!plantedSpecies.has(p.id)&&Number(p.group_unlock_xp||0)>Number(sharedGarden.xp||0));
         const options=eligible.map(p=>`<option value="${escapeHtml(p.id)}">${escapeHtml(p.common_name)}</option>`).join('');
         const lockedNote=locked.length?` Noch ${locked.length} weitere Arten werden mit Gruppen-XP freigeschaltet.`:'';
-        sharedGardenMarkup=`<div class="sharedGarden"><div class="sharedGardenHead"><strong>🌿 Gemeinsamer Garten</strong><span class="sharedGardenStats">Level ${Number(sharedGarden.level||1)} · ${Number(sharedGarden.xp||0).toLocaleString('de-DE')} Gruppen-XP</span></div><div class="sharedGardenScene"><div class="sharedGardenPlants">${plantTiles}</div></div><div class="sharedGardenFooter"><select id="groupPlantSelect-${groupId}"><option value="">Pflanze für den Garten wählen …</option>${options}</select><button type="button" onclick="plantGroupGarden('${groupId}')" ${eligible.length?'':'disabled'}>＋ Pflanzen</button></div><div class="sharedGardenNote">Jede freigegebene Aktivität eines Gruppenmitglieds lässt alle vorhandenen Pflanzen wachsen. Neue Arten werden durch gemeinsame Gruppen-XP freigeschaltet.${lockedNote}</div></div>`;
+        const sceneId=`sharedGardenScene-${groupId}`;
+        sharedGardenMarkup=`<div class="sharedGarden"><div class="sharedGardenHead"><strong>🌿 Gemeinsamer Garten</strong><span class="sharedGardenStats">Level ${Number(sharedGarden.level||1)} · ${Number(sharedGarden.xp||0).toLocaleString('de-DE')} Gruppen-XP</span></div><div class="sharedGardenScene" id="${sceneId}"></div><div class="sharedGardenFooter"><select id="groupPlantSelect-${groupId}"><option value="">Pflanze für den Garten wählen …</option>${options}</select><button type="button" onclick="plantGroupGarden('${groupId}')" ${eligible.length?'':'disabled'}>＋ Pflanzen</button></div><div class="sharedGardenNote">Jede freigegebene Aktivität eines Gruppenmitglieds lässt dieselben Pflanzen wachsen und pflegt den gemeinsamen Garten. Pflanzen werden nicht kopiert.${lockedNote}</div></div>`;
+        if(!window._fitGrowSharedGardenRenders)window._fitGrowSharedGardenRenders=[];
+        window._fitGrowSharedGardenRenders.push({sceneId,plants:sharedPlants||[]});
       }
       groupCards.push(`<div class="challenge"><div class="challenge-head"><div><b>🌳 ${escapeHtml(group.name)}</b><p class="muted">${escapeHtml(group.description||'Gemeinsame Gruppe')} · ${members?.length||0} Mitglieder</p><small>${escapeHtml(memberNames.join(', '))}</small></div><span class="badge">Online</span></div>${sharedGardenMarkup}<h3>Aktivitäten der Gruppe</h3>${feed}</div>`);
     }
     $('groupsList').innerHTML=groupCards.join('')||'<div class="empty">Deine Gruppen konnten nicht angezeigt werden.</div>';
+    (window._fitGrowSharedGardenRenders||[]).forEach(item=>window.fitGrowRenderGardenScene?.(item.sceneId,item.plants));
   }
 
   async function refreshSocialAndAdmin(){await loadProfile();await loadFriends();await loadAdminPanel();await syncCustomActivities();await loadCustomActivities();await loadPlantCatalog();await syncGarden();await loadGardenPlants();await loadGroups();}
@@ -254,5 +246,7 @@
     $('btnLogout').addEventListener('click',()=>logout().catch(e=>status(e.message,true)));
     const {data,error}=await client.auth.getSession();if(error)status(error.message,true);handleAuthSession(data?.session?.user||null);
     client.auth.onAuthStateChange((_event,session)=>setTimeout(()=>handleAuthSession(session?.user||null),0));
+    // Während die Gruppenansicht offen ist, gemeinsame Gärten regelmäßig aktualisieren.
+    window.setInterval(()=>{if(currentUser&&!document.hidden&&$('groups')?.classList.contains('active'))loadGroups().catch(()=>{});},45000);
   });
 })();

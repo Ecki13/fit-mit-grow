@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1f4934">
 <title>Fit mit Grow</title>
-<meta name="fit-grow-version" content="6.0-shared-gardens-plant-catalog">
+<meta name="fit-grow-version" content="7.0-living-garden-botanical-library">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" href="./icons/icon-512.png">
@@ -124,6 +124,52 @@ select[multiple]{min-height:110px}.friendChooser{display:grid;gap:7px;padding:9p
 @media(min-width:600px){.sharedGardenPlants{grid-template-columns:repeat(4,minmax(0,1fr))}.sharedGardenPlant img{height:88px}}
 @media(max-width:380px){.sharedGardenPlants{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+
+/* =========================================================
+   V7 – lebendiger, räumlich geschichteter Garten
+   ========================================================= */
+main{max-width:1180px}
+.hero{height:390px;background:transparent;border-radius:22px;overflow:hidden;padding:0;color:#fff;isolation:isolate}
+.hero:before{display:none}
+.heroText{position:absolute;left:17px;top:15px;z-index:20;padding:9px 13px;border-radius:13px;background:linear-gradient(90deg,#183b29df,#183b2980);backdrop-filter:blur(5px);text-shadow:0 1px 4px #132719;font-size:16px}
+.gardenScene{position:absolute;inset:0;left:0;right:0;bottom:0;height:auto;display:block;overflow:hidden;border-radius:22px;background:#b6cba8 url('./plants/garden-base-v7.webp') center 56%/cover no-repeat;box-shadow:inset 0 0 0 1px #ffffff55,inset 0 -28px 40px #1d2c1e44}
+.gardenScene:before{content:'';position:absolute;inset:0;left:0;right:0;bottom:0;height:auto;border-radius:inherit;background:linear-gradient(180deg,#10261612 0%,transparent 35%,#1b2e1c14 68%,#20301c38 100%);opacity:1;pointer-events:none}
+.gardenScene:after{content:'';position:absolute;left:0;right:0;bottom:0;height:11%;background:linear-gradient(180deg,transparent,#322a1d26);pointer-events:none}
+.gardenPlantLayer{position:absolute;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:2px;width:var(--plant-width,140px);height:var(--plant-height,170px);left:var(--plant-left,50%);bottom:var(--plant-bottom,7%);transform:translateX(-50%);z-index:var(--plant-z,3);padding:0;background:transparent;border:0;border-radius:0;box-shadow:none;overflow:visible;cursor:pointer;transition:filter .25s ease,transform .25s ease}
+.gardenPlantLayer:hover,.gardenPlantLayer:focus-visible{filter:brightness(1.08) drop-shadow(0 4px 8px #15251a55);transform:translateX(-50%) translateY(-4px);outline:0}
+.gardenPlantLayer img{display:block;width:100%;height:calc(100% - 23px);object-fit:contain;object-position:center bottom;filter:drop-shadow(0 5px 5px #15251a45);mix-blend-mode:normal}
+.gardenPlantLayer img.cutout{object-fit:contain}
+.gardenPlantLayer img.photo{object-fit:cover;border-radius:48% 48% 16% 16%;border:2px solid #ffffffb0;box-shadow:0 4px 12px #1b2d1b45}
+.gardenPlantName{display:block;max-width:100%;padding:4px 8px;border:1px solid #ffffff8c;border-radius:30px;background:#173a29dd;color:#fff;font-size:10px;font-weight:750;line-height:1.1;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;box-shadow:0 3px 8px #182a1c55;backdrop-filter:blur(4px)}
+.gardenEmpty{position:absolute;left:50%;top:57%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px;padding:12px 18px;border-radius:16px;background:#f9fbf0d9;color:#35563a;text-align:center;box-shadow:0 5px 20px #213c2530;min-width:230px}.gardenEmpty span{font-size:30px}.gardenEmpty b{font-size:13px}.gardenEmpty small{font-size:11px;color:#627564}
+.gardenPlantHealth{position:absolute;top:3px;right:8px;padding:3px 6px;border-radius:20px;background:#fffdf0e8;color:#31583a;font-size:9px;font-weight:800;box-shadow:0 2px 6px #1d351d35}
+.gardenPlantLayer.is-wilting img{filter:saturate(.55) brightness(.94) drop-shadow(0 4px 4px #15251a35)}
+.gardenPlantLayer.is-critical img{filter:saturate(.28) brightness(.82) drop-shadow(0 3px 3px #15251a35)}
+.gardenPlantLayer.is-dead img{filter:grayscale(.82) sepia(.18) brightness(.68);opacity:.78}
+.gardenConditionLegend{display:flex;flex-wrap:wrap;gap:8px;margin:9px 0 0;color:var(--muted);font-size:11px}
+.conditionDot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#5b9a61;margin-right:4px}.conditionDot.wilting{background:#d0a044}.conditionDot.dead{background:#7f7770}
+.plant{cursor:pointer;transition:transform .2s,box-shadow .2s}.plant:hover,.plant:focus-visible{transform:translateY(-2px);box-shadow:0 10px 22px #263c2b18;outline:2px solid #8bb88a;outline-offset:2px}
+.plantDetailModal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:#101b15a8;backdrop-filter:blur(6px)}
+.plantDetailModal.open{display:flex}
+.plantDetailDialog{position:relative;width:min(760px,100%);max-height:min(88vh,900px);overflow:auto;border-radius:24px;background:#fffefa;box-shadow:0 24px 80px #08140e66;border:1px solid #ffffffa8}
+.plantDetailHero{display:grid;grid-template-columns:220px 1fr;gap:18px;padding:22px;background:linear-gradient(135deg,#eaf2e5,#f9f6e9)}
+.plantDetailHero img{width:100%;height:210px;object-fit:contain;background:#ffffff9c;border-radius:18px;padding:8px}
+.plantDetailHero h2{font-size:25px;margin:6px 0}.plantDetailHero .latin{font-size:13px}
+.plantDetailBody{padding:20px 22px 24px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.plantInfoBlock{padding:13px 14px;border:1px solid #e4eadf;border-radius:15px;background:#fff}
+.plantInfoBlock h3{margin:0 0 6px;color:#315c3b;font-size:13px}.plantInfoBlock p{margin:0;font-size:13px;line-height:1.5;color:#4b5e4e}
+.plantDetailClose{position:absolute;top:12px;right:12px;z-index:2;width:40px;height:40px;padding:0;border-radius:50%;font-size:22px;background:#173c29e8;color:white}
+.plantCareNotice{grid-column:1/-1;padding:13px 15px;border-radius:15px;background:#f4f5e9;color:#5c603d;font-size:12px;line-height:1.5}
+.sharedGarden{background:linear-gradient(180deg,#f9fbf6,#edf4e9);border-radius:19px;padding:12px;border:1px solid #dce7d8}
+.sharedGardenScene{position:relative;height:270px;min-height:270px;border-radius:15px;overflow:hidden;background:#b6cba8 url('./plants/garden-base-v7.webp') center 56%/cover no-repeat}
+.sharedGardenScene .gardenPlantLayer{height:var(--plant-height,160px)}
+.sharedGardenHead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
+.sharedGardenFooter{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+.sharedGardenNote{font-size:11px;color:#627564;margin-top:8px;line-height:1.45}
+@media(min-width:900px){.hero{height:430px}.gardenPlantLayer{width:var(--plant-width,180px)}}
+@media(max-width:700px){main{max-width:100%;padding:10px 10px 96px}.hero{height:285px}.gardenPlantLayer{width:var(--plant-width,100px)}.gardenPlantName{font-size:8px;padding:3px 6px}.gardenPlantLayer .gardenPlantHealth{font-size:8px}.sharedGardenScene{height:235px;min-height:235px}.plantDetailHero{grid-template-columns:120px 1fr;padding:16px;gap:12px}.plantDetailHero img{height:150px}.plantDetailBody{padding:14px;gap:8px}.plantInfoBlock{padding:10px}}
+@media(max-width:440px){.hero{height:250px}.gardenPlantLayer{width:var(--plant-width,80px)}.gardenPlantName{max-width:84px;white-space:normal;text-align:center}.plantDetailModal{padding:8px}.plantDetailDialog{border-radius:18px}.plantDetailHero{grid-template-columns:95px 1fr}.plantDetailHero img{height:122px}.plantDetailBody{grid-template-columns:1fr}.plantCareNotice{grid-column:1}}
+
 </style>
 </head>
 <body>
@@ -160,8 +206,8 @@ select[multiple]{min-height:110px}.friendChooser{display:grid;gap:7px;padding:9p
 <div class="card"><h2>Deine Aktivitäten</h2><div id="activityList" class="list"></div></div>
 </section>
 <section class="page" id="garden">
-<div class="card"><h2>🌿 Dein Garten</h2><div class="hero"><div class="heroText">Deine Bewegung lässt einen lebendigen Garten wachsen</div><div class="gardenScene" id="gardenPlants"></div></div><p class="muted">Sammle botanisch dargestellte Pflanzen. Gewöhnliche Arten schaltest du durch Aktivität frei, seltene Arten kannst du in Freundes-Challenges gewinnen.</p><div id="collection" class="plants"></div></div>
-<div class="card"><h2>Pflanzenbibliothek · 36 Arten</h2><p class="muted">Botanische Sammlung mit 36 Arten aus Blumen, Kräutern, Gräsern, Sträuchern, Obst, Gemüse, Bäumen und Exoten. Gemeinsame Gruppen-Gärten wachsen durch freigegebene Aktivitäten aller Mitglieder.</p><div class="plantSearch"><input id="plantSearch" type="search" placeholder="Pflanze suchen …"></div><div id="plantFilters" class="plantFilters"></div><div id="plantLibrary" class="plants"></div></div>
+<div class="card"><h2>🌳 Dein lebendiger Garten</h2><div class="hero"><div class="heroText">Dein Garten wächst mit jeder Bewegung</div><div class="gardenScene" id="gardenPlants"></div></div><div class="gardenConditionLegend"><span><i class="conditionDot"></i> Gesund</span><span><i class="conditionDot wilting"></i> Braucht Zuwendung</span><span><i class="conditionDot dead"></i> Abgestorben</span></div><p class="muted">Pflanzen wachsen in unterschiedlichen Höhen und Gartenschichten. Lange Inaktivität kann sie langsam welken lassen; eine neue Aktivität belebt sie wieder.</p><div id="collection" class="plants"></div></div>
+<div class="card"><h2>Pflanzenbibliothek · 35 Arten</h2><p class="muted">Entdecke Herkunft, Lebensraum, Verwendung, besondere Eigenschaften und Pflege jeder Pflanzenart. Tippe eine Pflanze an, um ihr botanisches Porträt zu öffnen.</p><div class="plantSearch"><input id="plantSearch" type="search" placeholder="Pflanze suchen …"></div><div id="plantFilters" class="plantFilters"></div><div id="plantLibrary" class="plants"></div></div>
 </section>
 <section class="page" id="groups"><div class="card"><h2>🔐 Konto & Freunde (Online)</h2><p class="muted">Registriere dich oder melde dich an. Deine Aktivitäten werden einmal mit deinem Konto synchronisiert. Freunde und gemeinsame Gruppen sehen freigegebene Einträge im jeweiligen Feed.</p><div id="authForm"><label>E-Mail</label><input id="authEmail" type="email" autocomplete="email" placeholder="deine@email.de"><label>Passwort</label><input id="authPassword" type="password" autocomplete="current-password" placeholder="Passwort"><div class="actions"><button id="btnSignup">Registrieren</button><button class="alt" id="btnLogin">Anmelden</button></div></div><div id="accountLoggedIn" style="display:none"><p>Angemeldet als <b id="accountEmail"></b></p><label>Benutzername (einzigartig, 3+ Zeichen)</label><input id="profileUsername" placeholder="z. B. ecki13"><label>Anzeigename</label><input id="profileDisplayName" placeholder="Wie Freunde dich sehen"><button id="btnSaveProfile" style="margin-top:10px">Profil speichern</button><button class="light" id="btnLogout" style="margin-top:10px">Abmelden</button></div><p id="accountStatus" class="muted" role="status"></p></div><div class="card" id="adminPanel" style="display:none"><h2>🛡️ Admin-Bereich</h2><p class="muted">Du bist als Administrator angemeldet. Hier siehst du alle registrierten Benutzerprofile. Private Aktivitäten und Gärten bleiben geschützt.</p><div id="adminUserList"></div></div><div class="card" id="friendArea" style="display:none"><h2>🤝 Freunde hinzufügen</h2><p class="muted">Freunde müssen zuerst ein Konto erstellen und einen Benutzernamen speichern.</p><label>Benutzername des Freundes</label><input id="friendUsername" placeholder="z. B. alex123"><button id="btnAddFriend" style="margin-top:10px">Freundschaftsanfrage senden</button><h3>Neue Anfragen</h3><div id="incomingRequests"></div><h3>Gesendete Anfragen</h3><div id="outgoingRequests"></div><h3>Deine Freunde</h3><div id="friendsList"></div><h3>Aktivitäten deiner Freunde</h3><div id="friendActivityFeed"></div></div><div class="card" id="groupArea" style="display:none">
 <h2>👥 Deine Online-Gruppen</h2>
@@ -193,11 +239,29 @@ select[multiple]{min-height:110px}.friendChooser{display:grid;gap:7px;padding:9p
 </section>
 <section class="page" id="stats"><div class="card"><h2>📊 Wochen & Monatsübersicht</h2><div class="tabs"><button class="selected" id="tabWeek" onclick="setStatsMode('week')">Letzte 7 Tage</button><button id="tabMonth" onclick="setStatsMode('month')">Dieser Monat</button><button id="tabAll" onclick="setStatsMode('all')">Gesamt</button></div><div class="metrics"><div class="metric"><strong id="periodPush">0</strong><span>Liegestütze</span></div><div class="metric"><strong id="periodPull">0</strong><span>Klimmzüge</span></div><div class="metric"><strong id="periodCount">0</strong><span>Aktivitäten</span></div></div><div id="periodRange" class="muted"></div><h3>Liegestütze – Tagesverlauf</h3><div id="pushChart" class="chart"></div><h3>Klimmzüge – Tagesverlauf</h3><div id="pullChart" class="chart"></div><h3>Sportarten</h3><div id="typeBreakdown"></div></div><div class="card"><h2>Gesamtfortschritt</h2><div class="metrics"><div class="metric"><strong id="totalAct">0</strong><span>Aktivitäten</span></div><div class="metric"><strong id="totalMinutes">0</strong><span>Minuten</span></div><div class="metric"><strong id="totalKm">0</strong><span>Kilometer</span></div></div></div><div class="card"><h2>💾 Daten sichern</h2><p class="muted">Daten werden aktuell lokal in diesem Browser gespeichert. Exportiere regelmäßig ein Backup.</p><div class="actions"><button onclick="exportBackup()">Exportieren</button><button class="alt" onclick="document.getElementById('backupFile').click()">Importieren</button><input id="backupFile" type="file" accept=".json" style="display:none" onchange="importBackup(event)"><button class="light" onclick="resetAll()">Zurücksetzen</button></div></div></section>
 </main>
+
+<div class="plantDetailModal" id="plantDetailModal" aria-hidden="true">
+ <div class="plantDetailDialog" role="dialog" aria-modal="true" aria-labelledby="plantDetailName">
+  <button class="plantDetailClose" type="button" id="plantDetailClose" aria-label="Schließen">×</button>
+  <div class="plantDetailHero"><img id="plantDetailImage" src="" alt=""><div><span class="badge" id="plantDetailCategory"></span><h2 id="plantDetailName"></h2><div class="latin" id="plantDetailLatin"></div><p class="muted" id="plantDetailIntro"></p><div id="plantDetailStatus"></div></div></div>
+  <div class="plantDetailBody">
+   <div class="plantInfoBlock"><h3>🌍 Herkunft</h3><p id="plantDetailOrigin"></p></div>
+   <div class="plantInfoBlock"><h3>🌱 Natürlicher Lebensraum</h3><p id="plantDetailHabitat"></p></div>
+   <div class="plantInfoBlock"><h3>🧺 Verwendung</h3><p id="plantDetailUses"></p></div>
+   <div class="plantInfoBlock"><h3>✨ Besondere Eigenschaften</h3><p id="plantDetailTraits"></p></div>
+   <div class="plantInfoBlock"><h3>☀️ Licht und Wasser</h3><p id="plantDetailNeeds"></p></div>
+   <div class="plantInfoBlock"><h3>🪴 Wuchsform und Pflege</h3><p id="plantDetailCare"></p></div>
+   <div class="plantCareNotice" id="plantDetailLife"></div>
+  </div>
+ </div>
+</div>
+
 <nav class="nav"><button class="active" onclick="navigate('home')"><span>🏡</span>Start</button><button onclick="navigate('activity')"><span>💪</span>Aktivität</button><button onclick="navigate('garden')"><span>🌿</span>Garten</button><button onclick="navigate('groups')"><span>👥</span>Gruppen</button><button onclick="navigate('challenges')"><span>🏆</span>Challenges</button><button onclick="navigate('stats')"><span>📊</span>Stats</button></nav><div id="toast" class="toast"></div>
+<script src="./plant-details-v7.js"></script>
 <script>
 'use strict';
 const DB='fitGrowProData';
-const blank={activities:[],plants:[],groups:[],challenges:[],customActivities:[]};
+const blank={activities:[],plants:[],groups:[],challenges:[],customActivities:[],plantCare:{}};
 let db;try{db={...blank,...JSON.parse(localStorage.getItem(DB)||'{}')}}catch{db=structuredClone(blank)}
 const $=id=>document.getElementById(id);
 const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
@@ -244,16 +308,32 @@ let plantData=[
  {name:'Brombeere',latin:'Rubus fruticosus agg.',image:'blackberry.webp',category:'Obst',photo:true,desc:'Kräftiger Beerenstrauch mit weißen Blüten und dunklen Sammelfrüchten.',tag:'Sommer · Naschgarten',unlock:172,rare:false}
 ];
 
+
+// V7 botanische Detaildaten als Offline-Fallback; der Supabase-Katalog ergänzt dieselben Felder online.
+const plantDetailFallback = window.FIT_GROW_PLANT_DETAILS || {};
+for (const plant of plantData) {
+  const d = plantDetailFallback[plant.name];
+  if (d) Object.assign(plant, {origin:d[0], habitat:d[1], uses:d[2], special:d[3],
+    light:d[4].split(' · ')[0], water:d[4].split(' · ')[1]||'Mittel', care:d[5], family:d[6],
+    gardenLayer:d[7], resilienceDays:d[8], wiltPeriodDays:d[9], gardenScale:d[10], gardenImagePath:d[11]});
+}
+
 // The online catalog is authoritative; local entries remain as an offline fallback.
 window.fitGrowSetPlantCatalog = items => {
  const previous=new Map(plantData.map(p=>[p.name,p]));
  plantData=(items||[]).map(row=>{
    const base=previous.get(row.common_name)||{};
-   return {...base,name:row.common_name,latin:row.latin_name,category:row.category,
+   return {...base,id:row.id,name:row.common_name,latin:row.latin_name,category:row.category,
      desc:row.description||base.desc||'',tag:row.tagline||base.tag||'',
      image:row.image_path||base.image||'garden-backdrop.webp',photo:true,
      unlock:Number(row.unlock_activity_count??base.unlock??0),rare:!!row.challenge_only,
      groupUnlockXp:Number(row.group_unlock_xp||0),growthDays:Number(row.growth_days||120),
+     family:row.botanical_family||base.family||'',origin:row.origin_region||base.origin||'',habitat:row.natural_habitat||base.habitat||'',
+     uses:row.uses_text||base.uses||'',special:row.special_traits||base.special||'',care:row.care_notes||base.care||'',
+     light:row.light_requirement||base.light||'Sonnig bis halbschattig',water:row.water_requirement||base.water||'Mittel',
+     growthForm:row.growth_form||base.growthForm||'',gardenLayer:row.garden_layer||base.gardenLayer||'middle',
+     resilienceDays:Number(row.resilience_days||base.resilienceDays||45),wiltPeriodDays:Number(row.wilt_period_days||base.wiltPeriodDays||45),
+     gardenScale:Number(row.garden_scale||base.gardenScale||1),gardenImagePath:row.garden_image_path||base.gardenImagePath||'',
      growthThresholds:[Number(row.growth_xp_stage_2||15),Number(row.growth_xp_stage_3||40),Number(row.growth_xp_stage_4||80),Number(row.growth_xp_stage_5||130)]};
  }).filter(p=>p.name);
  renderPlantLibrary();
@@ -266,10 +346,10 @@ const growthLabels=['Keimling','Jungpflanze','Blattwachstum','Knospen / Frucht',
 const plantCategories=['Alle','Blumen','Bäume','Sträucher','Gräser','Kräuter','Obst','Gemüse','Exoten'];
 let activePlantCategory='Alle';
 function totalActivityXp(){return (db.activities||[]).reduce((s,a)=>s+(Number(a.xp)||0),0);}
-function ensurePlantProgress(){if(!db.plantProgress||typeof db.plantProgress!=='object')db.plantProgress={};const seed=Math.min(200,totalActivityXp());for(const name of db.plants||[]){if(!db.plantProgress[name]||typeof db.plantProgress[name]!=='object')db.plantProgress[name]={xp:seed};else db.plantProgress[name].xp=Math.max(0,Number(db.plantProgress[name].xp)||0);}}
+function ensurePlantProgress(){if(!db.plantProgress||typeof db.plantProgress!=='object')db.plantProgress={};if(!db.plantCare||typeof db.plantCare!=='object')db.plantCare={};const seed=Math.min(200,totalActivityXp());for(const name of db.plants||[]){if(!db.plantProgress[name]||typeof db.plantProgress[name]!=='object')db.plantProgress[name]={xp:seed};else db.plantProgress[name].xp=Math.max(0,Number(db.plantProgress[name].xp)||0);if(!db.plantCare[name])db.plantCare[name]=new Date().toISOString();}}
 function growthInfo(name){ensurePlantProgress();const xp=Math.max(0,Number(db.plantProgress[name]?.xp)||0);const p=plantByName(name);const thresholds=[0,...(p?.growthThresholds||growthThresholds.slice(1))];let stage=1;for(let i=1;i<thresholds.length;i++){if(xp>=thresholds[i])stage=i+1;else break;}const current=thresholds[stage-1];const next=thresholds[stage]??current;const percent=stage===5?100:Math.max(0,Math.min(100,Math.round((xp-current)/(next-current)*100)));return {xp,stage,label:growthLabels[stage-1],percent,nextXp:next};}
 function growthImage(p,stage){if(p.stageImages){const ix=stage<=1?0:stage<=3?1:2;return p.stageImages[ix];}return p.image;}
-function advancePlantGrowth(points){ensurePlantProgress();for(const name of db.plants||[]){const state=db.plantProgress[name]||{xp:0};state.xp=Math.min(2000,(Number(state.xp)||0)+Math.max(0,Number(points)||0));db.plantProgress[name]=state;}}
+function advancePlantGrowth(points){ensurePlantProgress();if(!db.plantCare||typeof db.plantCare!=='object')db.plantCare={};const now=new Date().toISOString();for(const name of db.plants||[]){const state=db.plantProgress[name]||{xp:0};state.xp=Math.min(2000,(Number(state.xp)||0)+Math.max(0,Number(points)||0));db.plantProgress[name]=state;db.plantCare[name]=now;}}
 function initPlantFilters(){const el=$('plantFilters');if(!el)return;el.innerHTML=plantCategories.map(cat=>`<button type="button" class="${cat===activePlantCategory?'active':''}" onclick="setPlantCategory('${cat}')">${cat}</button>`).join('');}
 function setPlantCategory(cat){activePlantCategory=plantCategories.includes(cat)?cat:'Alle';initPlantFilters();renderPlantLibrary();}
 function renderPlantLibrary(){const q=($('plantSearch')?.value||'').trim().toLowerCase();const list=plantData.filter(p=>(activePlantCategory==='Alle'||p.category===activePlantCategory)&&(!q||`${p.name} ${p.latin} ${p.desc} ${p.category}`.toLowerCase().includes(q)));$('plantLibrary').innerHTML=list.map(p=>plantCard(p,(db.plants||[]).includes(p.name))).join('')||'<div class="empty">Keine passende Pflanze gefunden.</div>';}
@@ -329,9 +409,84 @@ $('activityForm').addEventListener('submit',e=>{
  unlockActivityPlants();
  e.target.reset();$('activityDate').value=today();fields();save();toast('Aktivität gespeichert 🌱');navigate('home');
 });
-function unlockActivityPlants(){ensurePlantProgress();for(const p of plantData.filter(p=>!p.rare&&db.activities.length>=p.unlock)){if(!db.plants.includes(p.name)){db.plants.push(p.name);db.plantProgress[p.name]={xp:0};}}}
-function plantCard(p,owned){const g=owned?growthInfo(p.name):null;const image=owned?growthImage(p,g.stage):p.image;const stageScale=owned?['48%','62%','76%','90%','100%'][g.stage-1]:'100%';return `<div class="plant ${owned?'owned':'locked'}"><div class="plantVisual"><img class="${p.photo?'photo':''}" src="./plants/${image}" alt="${escapeHtml(p.name)}" loading="lazy"></div><div class="plantCopy"><b>${escapeHtml(p.name)}${owned?' ✓':''}</b><div class="latin">${escapeHtml(p.latin)}</div><p class="muted">${escapeHtml(p.desc)}</p><div class="plantMeta"><span class="badge">${escapeHtml(p.category)}</span><span class="badge">${escapeHtml(p.rare?'🏆 Challenge-Belohnung':`Freischaltung ab ${p.unlock} Aktivitäten`)}</span></div>${owned?`<div class="plantGrowth"><div class="plantGrowthHead"><span>${escapeHtml(g.label)}</span><span>${g.percent}%</span></div><div class="plantGrowthBar"><i style="width:${g.percent}%"></i></div><div class="plantStages">${[1,2,3,4,5].map(n=>`<span class="${g.stage>=n?'done':''}"></span>`).join('')}</div><div class="formHint">${g.stage===5?'Pflanze ausgewachsen. Weiteres Training stärkt deinen Garten.':`${Math.max(0,g.nextXp-g.xp)} XP bis zur nächsten Wachstumsstufe`}</div></div>`:''}<span class="badge">${escapeHtml(p.tag)}</span></div></div>`;}
-function renderGardenScene(id){const el=$(id);if(!el)return;ensurePlantProgress();const visible=(db.plants||[]).map(plantByName).filter(Boolean);const display=(visible.length?visible:[plantData[0],plantData[2],plantData[4]]).slice(-5);el.innerHTML=display.map(p=>{const g=(db.plants||[]).includes(p.name)?growthInfo(p.name):{stage:1,label:'Keimling',percent:0};const heights=[54,72,88,105,120];const image=growthImage(p,g.stage);return `<div class="gardenPlantItem"><img class="gardenPlantImg ${p.photo?'photo':''}" style="--plant-height:${heights[g.stage-1]}px" src="./plants/${image}" alt="${escapeHtml(p.name)}" loading="lazy"><div class="gardenPlantTag"><b>${escapeHtml(p.name)}</b><span>${escapeHtml(g.label)}</span><div class="gardenMiniBar"><i style="width:${g.percent}%"></i></div></div></div>`;}).join('');}
+function unlockActivityPlants(){ensurePlantProgress();for(const p of plantData.filter(p=>!p.rare&&db.activities.length>=p.unlock)){if(!db.plants.includes(p.name)){db.plants.push(p.name);db.plantProgress[p.name]={xp:0};if(!db.plantCare)db.plantCare={};db.plantCare[p.name]=new Date().toISOString();}}}
+function plantCondition(p,lastCaredAt){
+ const raw=lastCaredAt||db.plantCare?.[p.name]||new Date().toISOString();
+ const stamp=Date.parse(raw)||Date.now();
+ const days=Math.max(0,(Date.now()-stamp)/86400000);
+ const grace=Math.max(14,Number(p.resilienceDays)||45);
+ const wilt=Math.max(14,Number(p.wiltPeriodDays)||45);
+ const health=days<=grace?100:Math.max(0,Math.round(100*(1-(days-grace)/wilt)));
+ const state=health>=70?'gesund':health>=36?'pflege':health>0?'welkend':'abgestorben';
+ const label=state==='gesund'?'Gesund':state==='pflege'?'Braucht Zuwendung':state==='welkend'?'Welkt':'Abgestorben';
+ return {days:Math.floor(days),health,state,label,grace,deathAfter:grace+wilt,lastCaredAt:raw};
+}
+function plantCard(p,owned){
+ const g=owned?growthInfo(p.name):null;
+ const cond=owned?plantCondition(p,db.plantCare?.[p.name]):null;
+ const image=owned?growthImage(p,g.stage):p.image;
+ return `<div class="plant ${owned?'owned':'locked'}" data-plant-detail="${escapeHtml(p.name)}" role="button" tabindex="0" aria-label="Informationen zu ${escapeHtml(p.name)} öffnen"><div class="plantVisual"><img class="${p.photo?'photo':''}" src="./plants/${escapeHtml(image)}" alt="${escapeHtml(p.name)}" loading="lazy"></div><div class="plantCopy"><b>${escapeHtml(p.name)}${owned?' ✓':''}</b><div class="latin">${escapeHtml(p.latin)}</div><p class="muted">${escapeHtml(p.desc)}</p><div class="plantMeta"><span class="badge">${escapeHtml(p.category)}</span><span class="badge">${escapeHtml(p.rare?'🏆 Challenge-Belohnung':`Freischaltung ab ${p.unlock} Aktivitäten`)}</span></div>${owned?`<div class="plantGrowth"><div class="plantGrowthHead"><span>${escapeHtml(g.label)}</span><span>${g.percent}%</span></div><div class="plantGrowthBar"><i style="width:${g.percent}%"></i></div><div class="plantStages">${[1,2,3,4,5].map(n=>`<span class="${g.stage>=n?'done':''}"></span>`).join('')}</div><div class="formHint">${g.stage===5?'Pflanze ausgewachsen. Weiteres Training stärkt deinen Garten.':`${Math.max(0,g.nextXp-g.xp)} XP bis zur nächsten Wachstumsstufe`}</div><span class="badge">${cond.label}${cond.state!=='gesund'?` · ${cond.health}% Vitalität`:''}</span></div>`:''}<span class="badge">${escapeHtml(p.tag)}</span><div class="formHint">Tippen für Pflanzenporträt und Pflegewissen ↗</div></div></div>`;
+}
+function gardenPlantRows(){
+ ensurePlantProgress();
+ return (db.plants||[]).map(name=>{const p=plantByName(name);if(!p)return null;const g=growthInfo(name);return {plant_name:name,species_id:p.id,growth_stage:g.stage,growth_xp:g.xp,last_cared_at:db.plantCare?.[name]||new Date().toISOString()};}).filter(Boolean);
+}
+function renderGardenScene(id,plantRows=null){
+ const el=$(id);if(!el)return;
+ let rows=plantRows||gardenPlantRows();
+ const maxVisible=window.innerWidth<520?8:14;
+ if(rows.length>maxVisible)rows=rows.slice(0,maxVisible);
+ if(!rows.length){el.innerHTML='<div class="gardenEmpty"><span>🌱</span><b>Hier wartet Platz für deinen Garten</b><small>Erfasse Aktivitäten und schalte deine ersten Pflanzen frei.</small></div>';return;}
+ const layers={rear:[],middle:[],front:[]};
+ rows.forEach((row,i)=>{const p=plantByName(row.plant_name)||plantData.find(x=>x.id===row.species_id);if(!p)return;const layer=['rear','middle','front'].includes(p.gardenLayer)?p.gardenLayer:'middle';layers[layer].push({row,p,i});});
+ const slots={rear:[7,17,29,39,64,75,86,95,11,90],middle:[8,21,33,41,63,74,86,95,14,80],front:[5,16,27,38,63,73,83,94,11,90]};
+ const bases={rear:18,middle:10,front:5};
+ let out='';let z=1;
+ for(const layer of ['rear','middle','front']){
+  const list=layers[layer];
+  list.forEach((item,i)=>{
+   const {row,p}=item;const xp=Math.max(0,Number(row.growth_xp)||0);const thresholds=[0,...(p.growthThresholds||[15,40,80,130])];let stage=Math.max(1,Math.min(5,Number(row.growth_stage)||1));
+   if(!row.growth_stage){for(let j=1;j<thresholds.length;j++)if(xp>=thresholds[j])stage=j+1;}
+   const progress=growthInfo(p.name);const cond=plantCondition(p,row.last_cared_at||db.plantCare?.[p.name]);
+   const scale=[.36,.52,.68,.84,1][stage-1]*(Number(p.gardenScale)||1);
+   const layerBase=layer==='rear'?184:layer==='middle'?145:108;
+   const height=Math.round(layerBase*scale);
+   const width=Math.round(height*(layer==='rear'?.78:.88));
+   const x=slots[layer][i%slots[layer].length];
+   const bottom=bases[layer]+(i%3)*1.6;
+   const image=p.gardenImagePath||p.image;
+   const isCutout=String(image).startsWith('cutouts/');
+   const stateClass=cond.state==='gesund'?'':cond.state==='pflege'?'is-wilting':cond.state==='welkend'?'is-critical':'is-dead';
+   const healthText=cond.state==='gesund'?'♥':`${cond.health}%`;
+   out+=`<button type="button" class="gardenPlantLayer ${stateClass}" data-plant-detail="${escapeHtml(p.name)}" data-plant-stage="${stage}" data-plant-xp="${xp}" data-plant-last-cared="${escapeHtml(row.last_cared_at||'')}" title="${escapeHtml(p.name)} – ${escapeHtml(cond.label)}" style="--plant-left:${x}%;--plant-bottom:${bottom}%;--plant-height:${height+25}px;--plant-width:${width}px;--plant-z:${z++}"><img class="${isCutout?'cutout':'photo'}" src="./plants/${escapeHtml(image)}" alt="${escapeHtml(p.name)}" loading="lazy"><span class="gardenPlantHealth">${healthText}</span><span class="gardenPlantName">${escapeHtml(p.name)}</span></button>`;
+  });
+ }
+ el.innerHTML=out;
+}
+window.fitGrowRenderGardenScene=(id,rows)=>renderGardenScene(id,rows||[]);
+function openPlantDetails(name,row=null){
+ const p=plantByName(name);if(!p)return;
+ const owned=(db.plants||[]).includes(p.name)||!!row;
+ const growth=owned?(row?{stage:Math.max(1,Number(row.growth_stage)||1),xp:Number(row.growth_xp)||0,label:growthLabels[Math.max(0,Math.min(4,(Number(row.growth_stage)||1)-1))],percent:0}:growthInfo(p.name)):null;
+ const care=owned?plantCondition(p,row?.last_cared_at||db.plantCare?.[p.name]):null;
+ const el=id=>$(id);
+ el('plantDetailImage').src=`./plants/${p.image}`;el('plantDetailImage').alt=p.name;
+ el('plantDetailCategory').textContent=p.category||'Pflanze';el('plantDetailName').textContent=p.name;el('plantDetailLatin').textContent=p.latin||'';el('plantDetailIntro').textContent=p.desc||'';
+ el('plantDetailOrigin').textContent=p.origin||'Weitere Herkunftsinformationen werden ergänzt.';
+ el('plantDetailHabitat').textContent=p.habitat||'Keine Angabe verfügbar.';
+ el('plantDetailUses').textContent=p.uses||'Keine Angabe verfügbar.';
+ el('plantDetailTraits').textContent=p.special||'Keine Angabe verfügbar.';
+ el('plantDetailNeeds').textContent=`Licht: ${p.light||'—'}. Wasser: ${p.water||'—'}.`;
+ el('plantDetailCare').textContent=`${p.growthForm||p.category||'Pflanze'}. ${p.care||'Standort- und artgerechte Pflege beachten.'}`;
+ el('plantDetailStatus').innerHTML=owned?`<span class="badge">${escapeHtml(growth.label)}</span> <span class="badge">${escapeHtml(care.label)} · ${care.health}% Vitalität</span>`:`<span class="badge">${p.rare?'Seltene Challenge-Pflanze':`Freischaltung ab ${p.unlock} Aktivitäten`}</span>`;
+ el('plantDetailLife').textContent=owned?`Dein Garten pflegt diese Pflanze über deine Bewegung. ${care.days<=care.grace?`Noch ${Math.max(0,care.grace-care.days)} Tage bis zum Beginn der Welke bei längerer Inaktivität.`:care.health>0?`Sie braucht wieder Zuwendung. Bei dieser Art beginnt die Welke nach ${care.grace} Tagen ohne Gartenpflege; nach insgesamt etwa ${care.deathAfter} Tagen kann sie absterben.`:'Die Pflanze ist abgestorben. Eine neue Aktivität kann sie im Spiel wiederbeleben.'} Die Fristen unterscheiden sich je nach Pflanzenart. Normale Pausen führen nicht sofort zu Schäden.`:`Diese Art ist noch nicht in deinem Garten. In der Bibliothek kannst du sie kennenlernen; freigeschaltete Arten beginnen als Keimling.`;
+ const modal=el('plantDetailModal');modal.classList.add('open');modal.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';el('plantDetailClose').focus();
+}
+function closePlantDetails(){const modal=$('plantDetailModal');if(!modal)return;modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+document.addEventListener('click',e=>{const button=e.target.closest('[data-plant-detail]');if(button){const row=button.dataset.plantStage?{growth_stage:Number(button.dataset.plantStage),growth_xp:Number(button.dataset.plantXp)||0,last_cared_at:button.dataset.plantLastCared||null}:null;openPlantDetails(button.getAttribute('data-plant-detail'),row);return;}if(e.target.id==='plantDetailModal')closePlantDetails();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePlantDetails();if((e.key==='Enter'||e.key===' ')&&e.target.matches('[data-plant-detail][role="button"]')){e.preventDefault();openPlantDetails(e.target.getAttribute('data-plant-detail'));}});
+$('plantDetailClose')?.addEventListener('click',closePlantDetails);
+
 function entry(a){return `<div class="entry"><div><strong>${escapeHtml(a.type)}</strong><small>${escapeHtml(a.date)}${a.reps?` · ${a.reps} Wdh.`:''}${a.duration?` · ${a.duration} Min`:''}${a.distance?` · ${a.distance} km`:''}${a.note?`<br>${escapeHtml(a.note)}`:''}${a.visibility==='private'?' · 🔒 Nur ich':' · 👥 Freunde'}</small></div><span class="xp">+${Number(a.xp||0)} XP</span></div>`;}
 function dateObj(s){return new Date(`${s}T12:00:00`)}
 function last7(){let arr=[];let now=dateObj(today());for(let i=6;i>=0;i--){let x=new Date(now);x.setDate(x.getDate()-i);arr.push(`${x.getFullYear()}-${String(x.getMonth()+1).padStart(2,'0')}-${String(x.getDate()).padStart(2,'0')}`)}return arr;}
@@ -346,8 +501,8 @@ window.fitGrowGetAppData=()=>db;
 window.fitGrowSetActivities=activities=>{db.activities=Array.isArray(activities)?activities:[];unlockActivityPlants();localStorage.setItem(DB,JSON.stringify(db));render();};
 window.fitGrowRestoreAppData=data=>{db={...blank,...(data||{})};ensurePlantProgress();localStorage.setItem(DB,JSON.stringify(db));render();};
 window.fitGrowSetCustomActivities=items=>{db.customActivities=Array.isArray(items)?items:[];localStorage.setItem(DB,JSON.stringify(db));fillActivityOptions();fillChallengeActivityOptions();fields();renderCustomActivityList();};
-window.fitGrowSetPlants=items=>{const previous=new Set(db.plants||[]);const names=(items||[]).map(x=>typeof x==='string'?x:x.plant_name).filter(Boolean);db.plants=[...new Set([...(db.plants||[]),...names])];db.plantProgress=db.plantProgress&&typeof db.plantProgress==='object'?db.plantProgress:{};for(const item of (items||[])){if(typeof item==='object'&&item.plant_name){const remoteXp=Math.max(0,Number(item.growth_xp)||0);const localState=db.plantProgress[item.plant_name];db.plantProgress[item.plant_name]={xp:localState?Math.max(Number(localState.xp)||0,remoteXp):remoteXp};}else if(typeof item==='string'&&!db.plantProgress[item]){db.plantProgress[item]={xp:0};}}for(const name of previous){if(!db.plantProgress[name])db.plantProgress[name]={xp:Math.min(200,totalActivityXp())};}localStorage.setItem(DB,JSON.stringify(db));render();};
-function navigate(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach((b,i)=>b.classList.toggle('active',['home','activity','garden','groups','challenges','stats'][i]===id));if(id==='stats')renderStats();if(id==='challenges')refreshChallengeCenter();scrollTo({top:0,behavior:'smooth'});}
+window.fitGrowSetPlants=items=>{const previous=new Set(db.plants||[]);const names=(items||[]).map(x=>typeof x==='string'?x:x.plant_name).filter(Boolean);db.plants=[...new Set([...(db.plants||[]),...names])];db.plantProgress=db.plantProgress&&typeof db.plantProgress==='object'?db.plantProgress:{};db.plantCare=db.plantCare&&typeof db.plantCare==='object'?db.plantCare:{};for(const item of (items||[])){if(typeof item==='object'&&item.plant_name){const remoteXp=Math.max(0,Number(item.growth_xp)||0);const localState=db.plantProgress[item.plant_name];db.plantProgress[item.plant_name]={xp:localState?Math.max(Number(localState.xp)||0,remoteXp):remoteXp};if(item.last_cared_at)db.plantCare[item.plant_name]=item.last_cared_at;}else if(typeof item==='string'&&!db.plantProgress[item]){db.plantProgress[item]={xp:0};}}for(const name of previous){if(!db.plantProgress[name])db.plantProgress[name]={xp:Math.min(200,totalActivityXp())};if(!db.plantCare[name])db.plantCare[name]=new Date().toISOString();}localStorage.setItem(DB,JSON.stringify(db));render();};
+function navigate(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===id));document.querySelectorAll('.nav button').forEach((b,i)=>b.classList.toggle('active',['home','activity','garden','groups','challenges','stats'][i]===id));if(id==='stats')renderStats();if(id==='challenges')refreshChallengeCenter();if(id==='groups')window.fitGrowOnline?.refreshGroups?.().catch(()=>{});scrollTo({top:0,behavior:'smooth'});}
 function setStatsMode(mode){statMode=mode;['week','month','all'].forEach(v=>$('tab'+v[0].toUpperCase()+v.slice(1)).classList.toggle('selected',v===mode));renderStats();}
 function toast(message){$('toast').textContent=message;$('toast').style.display='block';clearTimeout(window._growToastTimer);window._growToastTimer=setTimeout(()=>$('toast').style.display='none',2600);}
 async function plantGroupGarden(groupId){
@@ -406,10 +561,10 @@ async function refreshChallengeCenter(){
  }catch(e){$('challengeList').innerHTML=`<div class="empty">Challenges konnten nicht geladen werden: ${escapeHtml(e.message||e)}</div>`;}
 }
 async function respondChallenge(id,accept){try{await window.fitGrowOnline.respondChallengeInvite(id,accept);toast(accept?'Challenge angenommen!':'Einladung abgelehnt.');await refreshChallengeCenter();}catch(e){toast(`Aktion fehlgeschlagen: ${e.message||e}`);}}
-async function claimChallengeReward(id,plantName){try{const success=await window.fitGrowOnline.claimChallengeReward(id);if(success){if(!db.plants.includes(plantName)){db.plants.push(plantName);db.plantProgress[plantName]={xp:0};}localStorage.setItem(DB,JSON.stringify(db));render();toast(`${plantName} gewonnen! Sie ist als Keimling in deinem Garten. 🌿`);}else toast('Diese Belohnung kann noch nicht abgeholt werden.');await refreshChallengeCenter();}catch(e){toast(`Belohnung konnte nicht abgeholt werden: ${e.message||e}`);}}
+async function claimChallengeReward(id,plantName){try{const success=await window.fitGrowOnline.claimChallengeReward(id);if(success){if(!db.plants.includes(plantName)){db.plants.push(plantName);db.plantProgress[plantName]={xp:0};if(!db.plantCare)db.plantCare={};db.plantCare[plantName]=new Date().toISOString();}localStorage.setItem(DB,JSON.stringify(db));render();toast(`${plantName} gewonnen! Sie ist als Keimling in deinem Garten. 🌿`);}else toast('Diese Belohnung kann noch nicht abgeholt werden.');await refreshChallengeCenter();}catch(e){toast(`Belohnung konnte nicht abgeholt werden: ${e.message||e}`);}}
 function exportBackup(){let blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='fit-mit-grow-backup.json';a.click();URL.revokeObjectURL(a.href);}
 function importBackup(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{db={...blank,...JSON.parse(r.result)};save();toast('Backup importiert');}catch{toast('Backup konnte nicht gelesen werden');}};r.readAsText(f);}
 function resetAll(){if(confirm('Alle Fit mit Grow Daten auf diesem Gerät löschen?')){db=structuredClone(blank);save();toast('Daten gelöscht');}}
 ensurePlantProgress();fillActivityOptions();fillChallengeActivityOptions();updateChallengeMetrics();initPlantFilters();render();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=8').catch(()=>{}));
+if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js?v=12').catch(()=>{}));
 </script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="./config.js"></script><script src="./auth.js"></script></body></html>
